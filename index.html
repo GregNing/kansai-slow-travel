@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4efe6" />
+    <meta name="description" content="一份離線也能使用的手機旅程手冊" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>漫遊手冊 · 山海之間</title>
+  </head>
+  <body>
+    <div class="paper-texture"></div>
+    <main class="app-shell">
+      <nav class="main-nav" aria-label="主要導覽">
+        <div class="nav-links">
+          <button class="nav-link" data-panel="emergency" data-target="emergency-section" type="button">緊急</button>
+          <button class="nav-link active" data-panel="itinerary" data-target="itinerary-section" type="button">行程</button>
+          <button class="nav-link" data-panel="budget" data-target="budget-section" type="button">花費</button>
+          <button class="nav-link" data-panel="reminders" data-target="reminders-section" type="button">提醒</button>
+          <button class="nav-link" data-panel="checks" data-target="checks-section" type="button">檢查</button>
+        </div>
+        <button class="menu-button" id="menu-button" type="button" aria-label="開啟選單" aria-expanded="false"><i></i><i></i><i></i></button>
+      </nav>
+      <header class="masthead">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> PERSONAL TRAVEL EDITION · 2026</div>
+        <div class="masthead-row">
+          <div>
+            <p class="kicker">漫遊手冊</p>
+            <h1 id="trip-title">山海之間</h1>
+            <p id="trip-subtitle" class="subtitle"></p>
+          </div>
+          <div class="stamp" aria-label="行程天數"><strong id="trip-days">05</strong><span>DAYS<br />AWAY</span></div>
+        </div>
+        <div class="date-ribbon"><span id="trip-date-range"></span><span class="ribbon-line"></span><span id="trip-location"></span></div>
+      </header>
+
+      <section class="hero-card tab-panel" data-panel="itinerary" aria-labelledby="overview-heading">
+        <div class="hero-copy"><span class="section-label">OVERVIEW / 旅程總覽</span><h2 id="overview-heading">把每一站，<em>留在路上。</em></h2><p id="trip-description"></p></div>
+        <div class="weather-note"><span class="weather-icon">☼</span><div><b>出發前筆記</b><span id="trip-note"></span></div></div>
+      </section>
+
+      <section class="quick-panel tab-panel" data-panel="itinerary" aria-label="旅程摘要">
+        <div class="quick-item"><span>總站點</span><strong id="total-stops">—</strong></div>
+        <div class="quick-item"><span>預估總預算</span><strong id="total-budget">—</strong></div>
+        <div class="quick-item progress-item"><span>完成進度</span><strong id="progress-text">0%</strong><div class="progress-track"><div id="progress-bar"></div></div></div>
+      </section>
+
+      <section id="itinerary-section" class="anchor-section tab-panel" data-panel="itinerary"><nav class="day-tabs" id="day-tabs" aria-label="每日行程"></nav></section>
+
+      <section class="day-header tab-panel" data-panel="itinerary">
+        <div><span class="section-label">SELECTED DAY / 今日行程</span><h2 id="selected-day-title"></h2><p id="selected-day-summary"></p></div>
+        <button class="today-button" id="today-button" type="button">⌖ 跳到今天</button>
+      </section>
+
+      <section class="timeline tab-panel" data-panel="itinerary" id="timeline" aria-live="polite"></section>
+
+      <section class="budget-section tab-panel" data-panel="budget" id="budget-section">
+        <div class="section-label">FIELD NOTES / 預算筆記</div>
+        <div class="budget-grid" id="budget-grid"></div>
+      </section>
+
+      <section class="utility-section tab-panel" data-panel="reminders" id="reminders-section">
+        <div class="section-label">REMINDERS / 提醒</div>
+        <div class="utility-list" id="reminders-list"></div>
+      </section>
+
+      <section class="utility-section tab-panel" data-panel="checks" id="checks-section">
+        <div class="section-label">CHECKLIST / 出發檢查</div>
+        <div class="checklist" id="checklist"></div>
+      </section>
+
+      <section class="utility-section tab-panel" data-panel="emergency" id="emergency-section">
+        <div class="section-label">EMERGENCY / 緊急資訊</div>
+        <div class="emergency-grid" id="emergency-grid"></div>
+      </section>
+
+      <footer><span>漫遊手冊 / Travel lightly, remember deeply.</span><span id="offline-status">● 可離線瀏覽</span></footer>
+    </main>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

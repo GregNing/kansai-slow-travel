@@ -1,0 +1,10 @@
+{
+  "name": "關西，慢慢走",
+  "short_name": "關西慢慢走",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbf9f4",
+  "theme_color": "#1e2927",
+  "lang": "zh-Hant",
+  "icons": []
+}
