@@ -13,7 +13,7 @@ function init() {
   $('trip-days').textContent = String(TRIP_DATA.days.length).padStart(2, '0');
   $('total-stops').textContent = TRIP_DATA.days.reduce((sum, day) => sum + day.stops.length, 0);
   $('total-budget').textContent = money(TRIP_DATA.budget.reduce((sum, item) => sum + item.amount, 0));
-  renderTabs(); renderBudget(); renderUtilitySections(); renderDay(); updateProgress();
+  renderTabs(); renderRouteCards(); renderBudget(); renderUtilitySections(); renderDay(); updateProgress();
   $('today-button').addEventListener('click', jumpToToday);
   document.querySelectorAll('.nav-link').forEach((button) => button.addEventListener('click', () => {
     document.querySelectorAll('.nav-link').forEach((item) => item.classList.toggle('active', item === button));
@@ -26,6 +26,22 @@ function init() {
     const open = document.querySelector('.nav-links').classList.toggle('open');
     $('menu-button').setAttribute('aria-expanded', String(open));
   });
+}
+
+function renderRouteCards() {
+  const tones = ['route-card-vermillion', 'route-card-moss', 'route-card-indigo', 'route-card-sand'];
+  $('route-cards').innerHTML = TRIP_DATA.days.slice(0, 4).map((day, index) => {
+    const lead = day.stops[0];
+    return `<button class="route-card ${tones[index % tones.length]}" type="button" data-route-day="${index}">
+      <span class="route-card-number">${String(index + 1).padStart(2, '0')}</span>
+      <span class="route-card-mark">${iconFor[lead.type] || '•'}</span>
+      <span class="route-card-copy"><small>${day.short} / ${day.weekday} · ${lead.place.split('／')[0]}</small><strong>${day.label}</strong><em>${day.summary}</em></span>
+      <span class="route-card-arrow">↗</span>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('[data-route-day]').forEach((button) => button.addEventListener('click', () => {
+    state.selectedDay = Number(button.dataset.routeDay); renderTabs(); renderDay(); $('itinerary-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
 }
 
 function renderTabs() {

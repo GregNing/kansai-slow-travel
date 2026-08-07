@@ -35,6 +35,11 @@
         <div class="date-ribbon"><span id="trip-date-range"></span><span class="ribbon-line"></span><span id="trip-location"></span></div>
       </header>
 
+      <section class="cover-story tab-panel" data-panel="itinerary" aria-labelledby="cover-heading">
+        <div class="cover-image" aria-hidden="true"><span class="cover-kanji">関西</span><span class="cover-seal">旅の記録<br />2026</span></div>
+        <div class="cover-caption"><span>THE SLOW EDITION / 01</span><strong id="cover-heading">在城市與山海之間，留一點空白。</strong><a href="#itinerary-section">開始閱讀行程 ↓</a></div>
+      </section>
+
       <section class="hero-card tab-panel" data-panel="itinerary" aria-labelledby="overview-heading">
         <div class="hero-copy"><span class="section-label">OVERVIEW / 旅程總覽</span><h2 id="overview-heading">把每一站，<em>留在路上。</em></h2><p id="trip-description"></p></div>
         <div class="weather-note"><span class="weather-icon">☼</span><div><b>出發前筆記</b><span id="trip-note"></span></div></div>
@@ -44,6 +49,25 @@
         <div class="quick-item"><span>總站點</span><strong id="total-stops">—</strong></div>
         <div class="quick-item"><span>預估總預算</span><strong id="total-budget">—</strong></div>
         <div class="quick-item progress-item"><span>完成進度</span><strong id="progress-text">0%</strong><div class="progress-track"><div id="progress-bar"></div></div></div>
+      </section>
+
+      <section class="story-index tab-panel" data-panel="itinerary" aria-labelledby="story-index-heading">
+        <div class="story-index-heading"><span class="section-label">THE ROUTE / 路線選集</span><h2 id="story-index-heading">這趟旅程，<em>從哪裡開始？</em></h2></div>
+        <div class="route-cards" id="route-cards"></div>
+      </section>
+
+      <section class="route-map tab-panel" data-panel="itinerary" aria-labelledby="route-map-heading">
+        <div class="route-map-copy"><span class="section-label">A LINE THROUGH KANSAI / 關西路線</span><h2 id="route-map-heading">不趕路，<br /><em>讓城市自己出現。</em></h2><p>一條從機場出發、穿過古都與河岸，最後回到大阪海風的路線。</p></div>
+        <div class="route-line" aria-label="關西旅行路線"><span class="route-stop route-stop-airport"><b>01</b><strong>關西機場</strong><small>ARRIVE</small></span><span class="route-stop route-stop-kyoto"><b>02</b><strong>京都</strong><small>STAY / 4 NIGHTS</small></span><span class="route-stop route-stop-nara"><b>03</b><strong>奈良</strong><small>DAY TRIP</small></span><span class="route-stop route-stop-osaka"><b>04</b><strong>大阪</strong><small>STAY / 3 NIGHTS</small></span></div>
+      </section>
+
+      <section class="guide-desk tab-panel" data-panel="itinerary" aria-labelledby="guide-desk-heading">
+        <div class="guide-desk-head"><span class="section-label">OFFICIAL FIELD GUIDE / 官方資料</span><h2 id="guide-desk-heading">出發前，<em>打開這三本指南。</em></h2></div>
+        <div class="guide-grid">
+          <a class="guide-card guide-kyoto" href="https://kyoto.travel/en/destinations/" target="_blank" rel="noopener"><span class="guide-card-label">KYOTO / 京都</span><strong>依興趣與區域找景點</strong><p>京都官方指南可依寺社、自然、食物、區域與交通規劃行程，也包含旅遊禮儀與地圖工具。</p><span class="guide-link">開啟 Kyoto Travel ↗</span></a>
+          <a class="guide-card guide-osaka" href="https://discover.osaka-info.jp/en/" target="_blank" rel="noopener"><span class="guide-card-label">OSAKA / 大阪</span><strong>從在地角度探索城市</strong><p>大阪官方指南整合景點、餐飲、夜生活、體驗、票券與行程靈感，適合補充自由時間。</p><span class="guide-link">開啟 Discover Osaka ↗</span></a>
+          <a class="guide-card guide-nara" href="https://www.visitnara.jp/destinations/" target="_blank" rel="noopener"><span class="guide-card-label">NARA / 奈良</span><strong>把一日遊走得更深</strong><p>奈良官方指南提供區域地圖、世界遺產、奈良町與近郊目的地，適合找安靜的延伸路線。</p><span class="guide-link">開啟 Visit Nara ↗</span></a>
+        </div>
       </section>
 
       <section id="itinerary-section" class="anchor-section tab-panel" data-panel="itinerary"><nav class="day-tabs" id="day-tabs" aria-label="每日行程"></nav></section>
