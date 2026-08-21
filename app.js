@@ -4,7 +4,8 @@ const money = (value) => `¥${value.toLocaleString('ja-JP')}`;
 const iconFor = { arrival: '✈', stay: '⌂', food: '⌁', train: '↝', nature: '✦', culture: '◌', cafe: '☕', fun: '★', shopping: '✳' };
 const routeMeta = {
   main: { className: 'main', eyebrow: 'MAIN ROUTE', title: '主要行程' },
-  emma: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' }
+  emma: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' },
+  overprint: { className: 'overprint', eyebrow: 'OVERPRINT ROUTE', title: 'Overprint 分流' }
 };
 const timeToMinutes = (time) => { const [hours, minutes] = time.split(':').map(Number); return hours * 60 + minutes; };
 
@@ -74,11 +75,19 @@ function renderDay() {
   }, []).sort((a, b) => (a.route === 'main' ? -1 : b.route === 'main' ? 1 : a.firstIndex - b.firstIndex));
   routes.forEach((group) => group.stops.sort((a, b) => timeToMinutes(a.stop.time) - timeToMinutes(b.stop.time)));
   const hasParallelRoutes = routes.length > 1;
+  const routeNotes = (day.routeNotes || []).map(renderRouteNote).join('');
   $('timeline').innerHTML = `${hasParallelRoutes ? '<div class="parallel-note"><strong>平行行程</strong><span>同一天可以同時安排不同人的路線；每個欄位都是獨立行程。</span></div>' : ''}<div class="timeline-board${hasParallelRoutes ? ' has-parallel-routes' : ''}">${routes.map((group) => {
     const meta = getRouteMeta(group.route);
     return `<section class="route-lane route-lane-${meta.className}" aria-label="${meta.title}"><header class="route-lane-head"><div><span class="section-label">${meta.eyebrow}</span><h3>${meta.title}</h3></div><span class="route-lane-count">${group.stops.length} 站</span></header><div class="route-timeline">${group.stops.map(({ stop, originalIndex }) => renderStop(day, stop, originalIndex, meta.key)).join('')}</div></section>`;
-  }).join('')}</div>`;
+  }).join('')}</div>${routeNotes ? `<div class="route-notes">${routeNotes}</div>` : ''}`;
   document.querySelectorAll('.check-wrap input').forEach((input) => input.addEventListener('change', (event) => { state.completed[event.target.dataset.key] = event.target.checked; localStorage.setItem('kansai-slow-travel-completed', JSON.stringify(state.completed)); event.target.closest('.stop').classList.toggle('completed', event.target.checked); updateProgress(); }));
+}
+
+function renderRouteNote(note) {
+  const meta = getRouteMeta(note.route);
+  const sections = (note.sections || []).map((section) => `<article class="route-note-block"><h4>${section.title}</h4><p>${section.text}</p></article>`).join('');
+  const tips = (note.tips || []).map((tip) => `<li>${tip}</li>`).join('');
+  return `<details class="route-notes-card route-notes-${meta.className}" open><summary><span class="route-notes-summary-copy"><span class="section-label">${meta.eyebrow}</span><strong>${note.title}</strong></span><span class="route-notes-toggle">展開／收合</span></summary><div class="route-notes-body"><p class="route-notes-intro">${note.intro}</p><div class="route-notes-grid">${sections}</div>${tips ? `<section class="route-notes-tips"><h4>${note.tipsTitle || '提醒'}</h4><ul>${tips}</ul></section>` : ''}</div></details>`;
 }
 
 function renderStop(day, stop, originalIndex, route) {

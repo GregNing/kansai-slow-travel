@@ -115,7 +115,32 @@ button, a { -webkit-tap-highlight-color:transparent; }
 .route-lane-emma .route-lane-head .section-label, .route-lane-emma .stop-kind { color:#a86445; }
 .route-lane-emma .stop-icon { color:#b26745; border-color:#d2a183; }
 .route-lane-emma .stop-card { border-color:#e2cdb9; }
+.route-lane-overprint { border-color:#bdcbd0; background:#fbfcfa; }
+.route-lane-overprint .route-lane-head { background:#e8edf0; }
+.route-lane-overprint .route-lane-head .section-label, .route-lane-overprint .stop-kind { color:var(--indigo); }
+.route-lane-overprint .stop-icon { color:var(--indigo); border-color:#aabcc2; }
+.route-lane-overprint .stop-card { border-color:#cbd6d8; }
 .route-lane-other .route-lane-head { background:#e8edf0; }
 .route-lane-other .route-lane-head .section-label { color:var(--indigo); }
+.route-notes { display:grid; gap:14px; margin-top:18px; }
+.route-notes-card { border:1px solid #bdcbd0; background:#f7f8f5; }
+.route-notes-card > summary { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:15px 17px 13px; cursor:pointer; list-style:none; background:#e8edf0; }
+.route-notes-card > summary::-webkit-details-marker { display:none; }
+.route-notes-card > summary:after { content:'＋'; color:var(--indigo); font-size:18px; line-height:1; }
+.route-notes-card[open] > summary:after { content:'−'; }
+.route-notes-summary-copy { display:flex; flex-direction:column; gap:5px; min-width:0; }
+.route-notes-summary-copy .section-label { color:var(--indigo); }
+.route-notes-summary-copy strong { font:600 21px/1.25 'Noto Serif TC',serif; letter-spacing:-.07em; }
+.route-notes-toggle { color:var(--muted); font-size:9px; white-space:nowrap; }
+.route-notes-body { padding:17px; border-top:1px solid #cbd6d8; }
+.route-notes-intro { margin:0 0 17px; color:#536159; font-size:11px; line-height:1.75; }
+.route-notes-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 20px; }
+.route-note-block { min-width:0; }
+.route-note-block h4, .route-notes-tips h4 { margin:0 0 5px; color:var(--indigo); font:600 14px/1.4 'Noto Serif TC',serif; letter-spacing:-.04em; }
+.route-note-block p { margin:0; color:var(--muted); font-size:10px; line-height:1.8; }
+.route-notes-tips { margin-top:17px; padding-top:14px; border-top:1px solid #d9e0df; }
+.route-notes-tips ul { margin:0; padding-left:18px; color:var(--muted); font-size:10px; line-height:1.8; }
+.route-notes-tips li + li { margin-top:5px; }
 @media (max-width:520px) { .parallel-note { display:block; }.parallel-note span { display:block; margin-top:3px; }.route-lane-head { padding-left:13px; padding-right:13px; } }
-@media (max-width:720px) { .timeline-board, .timeline-board.has-parallel-routes { grid-template-columns:1fr; } }
+@media (max-width:720px) { .timeline-board, .timeline-board.has-parallel-routes { grid-template-columns:1fr; }.route-notes-grid { grid-template-columns:1fr; } }
+@media (max-width:520px) { .route-notes-card > summary, .route-notes-body { padding-left:13px; padding-right:13px; }.route-notes-summary-copy strong { font-size:18px; }.route-notes-toggle { display:none; } }

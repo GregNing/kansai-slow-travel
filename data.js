@@ -81,7 +81,7 @@ const TRIP_DATA = {
       { time: "16:10", leave: "17:00", title: "心齋橋商店街", place: "大阪府大阪市中央區心齋橋筋", type: "shopping", transport: "步行", duration: "50 分鐘", note: "道頓堀與心齋橋相鄰，直接步行銜接；服飾、藥妝與伴手禮。大阪住宿地點仍待補。", cost: 5000 },
       { time: "17:00", leave: "17:45", route: "emma", title: "美國村站點 (Emma)", place: "大阪府大阪市中央區西心齋橋／LHPアメリカ村店／Blue in Green OSAKA", type: "shopping", transport: "步行", duration: "45 分鐘", note: "Emma 的美國村購物站點，涵蓋 LHPアメリカ村店和 Blue in Green OSAKA。", cost: 0 }
     ]},
-    { id: "day-6", short: "16", weekday: "五", label: "任天堂世界", summary: "10/16（週五）以 SUPER NINTENDO WORLD 為主線：Mario Kart、Donkey Kong、Yoshi 與可選的 Key Challenges。", stops: [
+    { id: "day-6", short: "16", weekday: "五", label: "任天堂世界", summary: "10/16（週五）主線為 SUPER NINTENDO WORLD；另提供 Overprint 購物分流，兩條路線可由不同同行者分開走。", stops: [
       { time: "07:00", leave: "07:45", title: "前往 Universal Studios Japan", place: "大阪府大阪市此花區櫻島 2-1-33", type: "train", transport: "JR 環狀線 → 夢咲線／Universal City", duration: "45 分鐘", note: "10/16 落在秋季活動期間，建議早到排隊；官方可能提早開始入場，實際營業時間與入場節奏前一天再確認。", cost: 400, links: [{ label: "USJ 官方營業時間", url: "https://www.usj.co.jp/web/en/us/park-guide/schedule/park-hour" }, { label: "JR West 路線・時刻表", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }] },
       { time: "07:45", leave: "08:15", title: "園前集合／票券與官方 App 最後確認", place: "Universal Studios Japan 大門外", type: "fun", transport: "步行／排隊", duration: "30 分鐘", note: "所有同行者先到齊；Studio Pass QR code 離線保存，官方 App 已更新、登入，並預先登錄所有同行者票券。不要把註冊票券留到閘口前才做。", cost: 0, links: [{ label: "官方 App 說明", url: "https://www.usj.co.jp/web/en/us/enjoy/numbered-ticket/app/timed-entry-ticket" }, { label: "Studio Pass 官方說明", url: "https://www.usj.co.jp/web/en/us/tickets?lang=en" }] },
       { time: "08:15", leave: "08:35", title: "入園後立即取得任天堂世界入場資格", place: "Universal Studios Japan", type: "fun", transport: "官方 App／步行", duration: "20 分鐘", note: "若 Express Pass 或旅行社票券已含 Area Timed Entry Ticket: Advance Booking，依票面時段；否則入園後用 App 取得 Area Timed Entry／Standby Entry。票券可能提早發完，取得後時間與人數不能改。", cost: 0, links: [{ label: "SUPER NINTENDO WORLD 官方資訊", url: "https://www.usj.co.jp/web/en/us/areas/super-nintendo-world" }, { label: "官方整理券說明", url: "https://www.usj.co.jp/web/en/us/enjoy/numbered-ticket" }] },
@@ -95,8 +95,44 @@ const TRIP_DATA = {
       { time: "15:45", leave: "17:30", title: "任天堂世界補拍・重玩・Meet-Up", place: "SUPER NINTENDO WORLD™", type: "fun", transport: "園區內步行", duration: "1 小時 45 分鐘", note: "回頭完成早上沒玩到的項目；依 App 即時等待時間、臨時休止與當日活動調整。2026 年為任天堂世界 5 週年，Meet-Up／特別活動時間要以官方當日表為準。", cost: 0, links: [{ label: "5 週年官方活動資訊", url: "https://www.usj.co.jp/web/en/us/areas/super-nintendo-world" }, { label: "USJ 官方 App", url: "https://www.usj.co.jp/web/en/us/enjoy/app?hideToolbar=false" }] },
       { time: "17:30", leave: "18:30", title: "任天堂世界最後巡回／晚餐／最後採買", place: "SUPER NINTENDO WORLD™", type: "fun", transport: "園區內步行", duration: "1 小時", note: "把最後一輪拍照、飲水、廁所與伴手禮一次完成；不為追其他園區而放棄任天堂主線。若當日營業或設施時間提早結束，提前移到備案。", cost: 1800, links: [{ label: "SUPER NINTENDO WORLD 餐飲官方資訊", url: "https://www.usj.co.jp/web/en/us/restaurants/super-nintendo-world-food" }] },
       { time: "18:30", leave: "19:30", title: "離開任天堂世界／其他區域備選", place: "Universal Studios Japan", type: "fun", transport: "園區內步行", duration: "1 小時", note: "只有在 Mario Kart、Mine Cart、Yoshi 與任天堂購物都完成後才離開主區；10/16 在 Halloween Horror Nights 活動期間，若不參加恐怖項目就依安全路線走，別為了追活動硬撐。", cost: 0, links: [{ label: "USJ 秋季活動官方資訊", url: "https://www.usj.co.jp/web/en/us/events/halloween-extreme-autumn-2026" }, { label: "USJ 官方最新公告", url: "https://www.usj.co.jp/web/en/us/park-guide/schedule/" }] },
-      { time: "19:30", leave: "20:30", title: "離園／返回住宿地", place: "Universal City Station／CityWalk", type: "train", transport: "步行／JR 夢咲線 → JR 環狀線", duration: "1 小時", note: "普通 Studio Pass 離園後不可再入園；要在出園前完成廁所、飲水、取物與最後採買。若留到 Halloween 夜間活動，回程時間另以當日官方安排為準。", cost: 400, links: [{ label: "JR West 路線・時刻表", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }, { label: "Studio Pass 官方說明", url: "https://www.usj.co.jp/web/en/us/tickets?lang=en" }] }
-    ]},
+      { time: "19:30", leave: "20:30", title: "離園／返回住宿地", place: "Universal City Station／CityWalk", type: "train", transport: "步行／JR 夢咲線 → JR 環狀線", duration: "1 小時", note: "普通 Studio Pass 離園後不可再入園；要在出園前完成廁所、飲水、取物與最後採買。若留到 Halloween 夜間活動，回程時間另以當日官方安排為準。", cost: 400, links: [{ label: "JR West 路線・時刻表", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }, { label: "Studio Pass 官方說明", url: "https://www.usj.co.jp/web/en/us/tickets?lang=en" }] },
+      { time: "09:00", leave: "09:10", route: "overprint", title: "待確大阪飯店 → JR難波駅", place: "大阪市區住宿地 → JR難波駅", type: "train", transport: "步行", duration: "5–10 分鐘", note: "依實際飯店位置調整；JR難波駅是這條路線唯一的 JR 起點站，與地鐵／近鐵的難波駅不同。", cost: 900 },
+      { time: "09:10", leave: "09:20", route: "overprint", title: "JR難波駅 → 天王寺駅", place: "JR難波駅 → JR天王寺駅", type: "train", transport: "JR大和路線", duration: "約 5 分鐘", note: "月台上往奈良或加茂方向的列車都會停天王寺，不用特別挑車次，也不用換月台。", cost: 0 },
+      { time: "09:20", leave: "09:45", route: "overprint", title: "天王寺駅 → 大阪駅", place: "JR天王寺駅 → JR大阪駅", type: "train", transport: "JR大阪環状線／往大阪方向", duration: "約 20 分鐘", note: "天王寺站內跟著 JR乗り換え／大阪環状線指標走；班次密集，預留轉移與等車時間。", cost: 0 },
+      { time: "09:45", leave: "09:55", route: "overprint", title: "大阪駅 → 尼崎駅", place: "JR大阪駅 → JR尼崎駅", type: "train", transport: "JR神戸線／快速・新快速", duration: "約 10 分鐘", note: "搭往三ノ宮或姫路方向的快速／新快速；新快速較快。", cost: 0 },
+      { time: "09:55", leave: "10:00", route: "overprint", title: "尼崎駅 → あまがさき Q's MALL", place: "JR尼崎駅 → あまがさきキューズモール", type: "shopping", transport: "步行", duration: "3–5 分鐘", note: "出站後跟著商場指標走，站內連通，通常不需要再找其他交通工具。", cost: 0 },
+      { time: "10:00", leave: "10:45", route: "overprint", title: "Blue in Green 尼崎店（overprint 店鋪）", place: "兵庫県尼崎市潮江1丁目3-1 あまがさきキューズモール2F", type: "shopping", transport: "商場內步行", duration: "45 分鐘", note: "overprint 店鋪，確定營業。", cost: 0 },
+      { time: "10:45", leave: "11:30", route: "overprint", title: "午餐（Q's MALL 內）", place: "あまがさきキューズモール餐廳／美食街", type: "food", transport: "商場內步行", duration: "45 分鐘", note: "直接在 Q's MALL 內用餐，非 overprint 店鋪，不需要另外移動。", cost: 0 },
+      { time: "11:30", leave: "11:50", route: "overprint", title: "尼崎駅 → 海老江駅", place: "JR尼崎駅 → JR海老江駅", type: "train", transport: "JR東西線／直通", duration: "約 15 分鐘", note: "JR神戸線與 JR東西線在尼崎直通運轉；若搭到往京橋／学研都市線方向的列車，可同車繼續坐，不用下車換月台。", cost: 0 },
+      { time: "11:50", leave: "12:00", route: "overprint", title: "海老江駅 → over print OSAKA", place: "JR海老江駅 → 大阪府大阪市福島区海老江7-22-24", type: "shopping", transport: "步行", duration: "5–8 分鐘", note: "從海老江站出站後步行前往直營店。", cost: 0 },
+      { time: "12:00", leave: "13:00", route: "overprint", title: "over print OSAKA 直營店（overprint 店鋪）", place: "大阪府大阪市福島区海老江7-22-24", type: "shopping", transport: "店內巡店", duration: "1 小時", note: "營業日待確認；官網日曆目前只排到 8 月，9、10 月尚未公布。若當日未營業，直接保留為梅田／難波自由時間。", cost: 0 },
+      { time: "13:00", leave: "13:10", route: "overprint", title: "海老江駅 → 大阪駅／北新地", place: "JR海老江駅 → 大阪駅／北新地", type: "train", transport: "JR東西線", duration: "約 10 分鐘", note: "由海老江原路返回大阪站／北新地一帶，再轉 JR大阪環状線。", cost: 0 },
+      { time: "13:10", leave: "13:35", route: "overprint", title: "大阪駅 → 天王寺駅", place: "JR大阪駅 → JR天王寺駅", type: "train", transport: "JR大阪環状線", duration: "約 20 分鐘", note: "搭往天王寺方向的環狀線班次。", cost: 0 },
+      { time: "13:35", leave: "13:45", route: "overprint", title: "天王寺駅 → JR難波駅", place: "JR天王寺駅 → JR難波駅", type: "train", transport: "JR大和路線", duration: "約 5 分鐘", note: "回到 JR難波駅後步行返回飯店。", cost: 0 },
+      { time: "13:45", leave: "13:55", route: "overprint", title: "JR難波駅 → 飯店", place: "JR難波駅 → 大阪市區住宿地", type: "stay", transport: "步行", duration: "5–10 分鐘", note: "依實際飯店位置調整。", cost: 0 },
+      { time: "13:55", leave: "", route: "overprint", title: "自由時間（非 overprint 店鋪）", place: "大阪市區／梅田或難波周邊", type: "nature", transport: "步行／大阪 Metro", duration: "彈性", note: "13:45 回飯店後開始；可視 over print OSAKA 是否營業與當天體力，加開梅田或難波周邊的悠閒時間。", cost: 0 }
+    ], routeNotes: [{
+      route: "overprint",
+      title: "Overprint 分流｜詳細說明",
+      intro: "這條路線與任天堂世界主線互斥，適合其他同行者平行安排；只安排 2 間 overprint 店鋪，13:45 回飯店後的時間保持彈性。",
+      sections: [
+        { title: "一、飯店 → JR難波駅", text: "步行約 5–10 分鐘（依實際飯店位置調整）。JR難波駅是本次行程唯一的 JR 起點站，跟地鐵／近鐵的「難波駅」是不同站體，出發前先用地圖確認清楚別走錯。" },
+        { title: "二、JR難波駅 → 天王寺駅（JR大和路線）", text: "月台上車廂會顯示往「奈良」或「加茂」方向，兩者都會停天王寺，不用特別挑車次。車程約 5 分鐘，不用換月台。" },
+        { title: "三、天王寺駅 → 大阪駅（JR大阪環状線）", text: "天王寺是大站，下車後跟著「JR乗り換え」或「大阪環状線」指標走。搭往「大阪」方向的班次，車程約 20 分鐘，班次密集，約 3–5 分鐘一班。" },
+        { title: "四、大阪駅 → 尼崎駅（JR神戸線）", text: "在大阪駅轉乘往「三ノ宮」「姫路」方向的列車，搭「快速」或「新快速」都可以（新快速較快）。車程約 10 分鐘。" },
+        { title: "五、尼崎駅 → あまがさき Q's MALL", text: "出站後跟著商場指標走，約 3–5 分鐘，站內連通不太會迷路。Blue in Green 尼崎店地址：兵庫県尼崎市潮江1丁目3-1 あまがさきキューズモール2F；午餐直接在 Q's MALL 內解決，非 overprint 店鋪，不用再移動。" },
+        { title: "六、尼崎駅 → 海老江駅（JR東西線）", text: "這段最輕鬆，JR神戸線跟 JR東西線在尼崎是直通運轉，同一班車繼續坐即可，不用下車換月台；車廂會顯示「京橋」或「学研都市線」方向，車程約 15 分鐘。" },
+        { title: "七、海老江駅 → over print OSAKA", text: "出站步行約 5–8 分鐘。over print OSAKA 直營店地址：大阪府大阪市福島区海老江7-22-24；營業日待確認，官網日曆目前只排到 8 月，9、10 月尚未公布。" },
+        { title: "八、返程", text: "海老江 →（JR東西線）→ 大阪駅／北新地 →（轉 JR大阪環状線）→ 天王寺駅 →（轉 JR大和路線）→ JR難波駅，全程約 30–35 分鐘，2 次轉乘。" }
+      ],
+      tipsTitle: "新手小提醒",
+      tips: [
+        "用 IC 卡，不用每站買票。ICOCA、Suica、PASMO 全國通用，進站感應、出站感應即可；中途在天王寺、大阪轉乘都不用出閘門補票，系統會自動算好全程車資。建議在關西機場或任一 JR 站先買一張 ICOCA（可加值）。",
+        "月台找不到路時，直接找站務員或看電子看板。天王寺、大阪都有英文／中文標示，也可以打開 Google Maps 或 Yahoo!乗換案内 App，輸入起訖站確認月台、發車時間與是否換車。",
+        "車資抓大概 700–900 円／人（單趟去回），實際金額以 IC 卡感應後的顯示為準，不用先精算。午餐費用另計。",
+        "這天只安排 2 間 overprint 店鋪；下午 13:45 後是空白時段。over print OSAKA 若確認沒開，行程會更空，可以視現場狀況加開一段梅田或難波周邊的悠閒時間。"
+      ]
+    }]},
     { id: "day-7", short: "17", weekday: "六", label: "大阪在地生活＋購物", summary: "從市場早餐開始，走過天神橋與北濱，最後逛梅田。", stops: [
       { time: "07:40", leave: "", title: "飯店出發", place: "大阪市區住宿地", type: "train", transport: "大阪 Metro／步行", duration: "彈性", note: "圖片只有抵達時間欄；實際出發時間以住宿地點與交通狀況調整。", cost: 300, links: [{ label: "Osaka Metro 官方", url: "https://subway.osakametro.co.jp/en/" }] },
       { time: "08:00", leave: "", title: "木津市場", place: "大阪府大阪市浪速區敷津東 2-2-8", type: "food", transport: "大阪 Metro／步行", duration: "彈性", note: "市場早餐與在地食材；10/17（週六）官方營業時間 05:30–18:00，各店開店時間不同。", cost: 1800, links: [{ label: "木津市場官方資訊", url: "https://kizu-ichiba.com/introduction/" }, { label: "Google Maps 導航", url: "https://www.google.com/maps/search/?api=1&query=大阪木津市場" }] },
