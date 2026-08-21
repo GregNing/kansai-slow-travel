@@ -5,7 +5,8 @@ const iconFor = { arrival: '✈', stay: '⌂', food: '⌁', train: '↝', nature
 const routeMeta = {
   main: { className: 'main', eyebrow: 'MAIN ROUTE', title: '主要行程' },
   emma: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' },
-  overprint: { className: 'overprint', eyebrow: 'OVERPRINT ROUTE', title: 'Overprint 分流' }
+  overprint: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' },
+  shared: { className: 'shared', eyebrow: 'TOGETHER / 共同行程', title: '一起行動' }
 };
 const timeToMinutes = (time) => { const [hours, minutes] = time.split(':').map(Number); return hours * 60 + minutes; };
 
@@ -66,7 +67,9 @@ function renderDay() {
   const day = TRIP_DATA.days[state.selectedDay];
   $('selected-day-title').innerHTML = `${day.label} <span>DAY ${state.selectedDay + 1}</span>`;
   $('selected-day-summary').textContent = day.summary;
+  const sharedStops = day.stops.filter((stop) => stop.shared).map((stop, originalIndex) => ({ stop, originalIndex }));
   const routes = day.stops.reduce((groups, stop, originalIndex) => {
+    if (stop.shared) return groups;
     const route = stop.route || 'main';
     let group = groups.find((item) => item.route === route);
     if (!group) { group = { route, firstIndex: originalIndex, stops: [] }; groups.push(group); }
@@ -75,12 +78,40 @@ function renderDay() {
   }, []).sort((a, b) => (a.route === 'main' ? -1 : b.route === 'main' ? 1 : a.firstIndex - b.firstIndex));
   routes.forEach((group) => group.stops.sort((a, b) => timeToMinutes(a.stop.time) - timeToMinutes(b.stop.time)));
   const hasParallelRoutes = routes.length > 1;
+  const sharedLane = sharedStops.length ? renderRouteLane(day, { route: 'shared', stops: sharedStops }) : '';
   const routeNotes = (day.routeNotes || []).map(renderRouteNote).join('');
-  $('timeline').innerHTML = `${hasParallelRoutes ? '<div class="parallel-note"><strong>平行行程</strong><span>同一天可以同時安排不同人的路線；每個欄位都是獨立行程。</span></div>' : ''}<div class="timeline-board${hasParallelRoutes ? ' has-parallel-routes' : ''}">${routes.map((group) => {
-    const meta = getRouteMeta(group.route);
-    return `<section class="route-lane route-lane-${meta.className}" aria-label="${meta.title}"><header class="route-lane-head"><div><span class="section-label">${meta.eyebrow}</span><h3>${meta.title}</h3></div><span class="route-lane-count">${group.stops.length} 站</span></header><div class="route-timeline">${group.stops.map(({ stop, originalIndex }) => renderStop(day, stop, originalIndex, meta.key)).join('')}</div></section>`;
-  }).join('')}</div>${routeNotes ? `<div class="route-notes">${routeNotes}</div>` : ''}`;
+  const parallelNote = hasParallelRoutes ? `<div class="parallel-note"><strong>${sharedStops.length ? '先一起行動' : '平行行程'}</strong><span>${sharedStops.length ? '先完成共同退房，往下再分成 Main Route／Emma Route；每個欄位都是獨立行程。' : '同一天可以同時安排不同人的路線；每個欄位都是獨立行程。'}</span></div>` : '';
+  const routeBoard = day.id === 'day-5'
+    ? renderDay5Board(day, routes)
+    : `<div class="timeline-board${hasParallelRoutes ? ' has-parallel-routes' : ''}">${routes.map((group) => renderRouteLane(day, group)).join('')}</div>`;
+  $('timeline').innerHTML = `${parallelNote}${sharedLane}${routeBoard}${routeNotes ? `<div class="route-notes">${routeNotes}</div>` : ''}`;
   document.querySelectorAll('.check-wrap input').forEach((input) => input.addEventListener('change', (event) => { state.completed[event.target.dataset.key] = event.target.checked; localStorage.setItem('kansai-slow-travel-completed', JSON.stringify(state.completed)); event.target.closest('.stop').classList.toggle('completed', event.target.checked); updateProgress(); }));
+}
+
+function renderDay5Board(day, routes) {
+  const main = routes.find((group) => group.route === 'main');
+  const emma = routes.find((group) => group.route === 'emma');
+  if (!main || !emma) return `<div class="timeline-board">${routes.map((group) => renderRouteLane(day, group)).join('')}</div>`;
+  const lunchIndex = main.stops.findIndex(({ stop }) => stop.title === '午餐（難波）');
+  if (lunchIndex < 0) return `<div class="timeline-board">${routes.map((group) => renderRouteLane(day, group)).join('')}</div>`;
+  const beforeLunch = main.stops.slice(0, lunchIndex);
+  const lunch = main.stops[lunchIndex];
+  const afterLunch = main.stops.slice(lunchIndex + 1);
+  return `<div class="day5-board">
+    ${renderRouteLane(day, { route: 'main', stops: beforeLunch }, { countOverride: main.stops.length })}
+    <div class="day5-parallel-pair">
+      <section class="day5-lunch-column" aria-label="午餐（難波）"><div class="route-timeline">${renderStop(day, lunch.stop, lunch.originalIndex, 'main')}</div></section>
+      ${renderRouteLane(day, { route: 'emma', stops: emma.stops })}
+    </div>
+    ${renderRouteLane(day, { route: 'main', stops: afterLunch }, { hideHeader: true, extraClass: 'route-lane-continuation' })}
+  </div>`;
+}
+
+function renderRouteLane(day, group, options = {}) {
+  const meta = getRouteMeta(group.route);
+  const extraClass = options.extraClass ? ` ${options.extraClass}` : '';
+  const header = options.hideHeader ? '' : `<header class="route-lane-head"><div><span class="section-label">${meta.eyebrow}</span><h3>${meta.title}</h3></div><span class="route-lane-count">${options.countOverride || group.stops.length} 站</span></header>`;
+  return `<section class="route-lane route-lane-${meta.className}${extraClass}" aria-label="${meta.title}">${header}<div class="route-timeline">${group.stops.map(({ stop, originalIndex }) => renderStop(day, stop, originalIndex, meta.key)).join('')}</div></section>`;
 }
 
 function renderRouteNote(note) {
