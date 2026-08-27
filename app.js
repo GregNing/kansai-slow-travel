@@ -1,6 +1,7 @@
 const state = { selectedDay: 0, completed: JSON.parse(localStorage.getItem('kansai-slow-travel-completed') || '{}') };
 const $ = (id) => document.getElementById(id);
 const money = (value) => `¥${value.toLocaleString('ja-JP')}`;
+const flightMoney = (currency, value) => `${currency} ${value.toLocaleString('en-US')}`;
 const googleMapsUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 const isGoogleMapsUrl = (url) => /google\.com\/maps|maps\.app\.goo\.gl/.test(url || '');
 const mapsUrlFor = (stop) => {
@@ -94,8 +95,43 @@ function renderDay() {
   const routeBoard = day.id === 'day-5'
     ? renderDay5Board(day, routes)
     : `<div class="timeline-board${hasParallelRoutes ? ' has-parallel-routes' : ''}">${routes.map((group) => renderRouteLane(day, group)).join('')}</div>`;
-  $('timeline').innerHTML = `${parallelNote}${sharedLane}${routeBoard}${routeNotes ? `<div class="route-notes">${routeNotes}</div>` : ''}`;
+  const flights = (day.flights || []).map(renderFlightDetails).join('');
+  $('timeline').innerHTML = `${flights}${parallelNote}${sharedLane}${routeBoard}${routeNotes ? `<div class="route-notes">${routeNotes}</div>` : ''}`;
   document.querySelectorAll('.check-wrap input').forEach((input) => input.addEventListener('change', (event) => { state.completed[event.target.dataset.key] = event.target.checked; localStorage.setItem('kansai-slow-travel-completed', JSON.stringify(state.completed)); event.target.closest('.stop').classList.toggle('completed', event.target.checked); updateProgress(); }));
+}
+
+function renderFlightDetails(flight) {
+  const passengerRows = flight.passengers.map((passenger) => `<tr><th scope="row">${passenger.name}</th><td>${passenger.detail}</td><td>${passenger.amount === null ? '—' : flightMoney(flight.currency, passenger.amount)}</td></tr>`).join('');
+  const breakdownRows = (flight.breakdown || []).map((item) => `<div><span>${item.label}</span><strong>${item.detail || ''}</strong><b>${flightMoney(flight.currency, item.amount)}</b></div>`).join('');
+  const summaryItems = [['日期', flight.date], ['航班時間', flight.schedule || `${flight.departure.time}–${flight.arrival.time}`], ['旅客人數', `${flight.passengers.length} 位成人`]];
+  if (flight.reference) summaryItems.push(['訂位／訂單', flight.reference]);
+  if (flight.bookingDate) summaryItems.push(['訂位日期', flight.bookingDate]);
+  if (flight.paymentMethod) summaryItems.push(['付款方式', flight.paymentMethod]);
+  const summary = summaryItems.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join('');
+  const flightNumber = flight.flightNumber ? `<b>${flight.flightNumber}</b>` : '';
+  return `<section class="flight-card" aria-label="${flight.airline} ${flight.flightNumber || ''} 航班詳細資訊">
+    <header class="flight-card-head">
+      <div><span class="section-label">FLIGHT / 航班票券</span><h3>${flight.airline} ${flightNumber}</h3><p>${flight.direction}｜${flight.route}</p></div>
+      <span class="flight-status">${flight.status}</span>
+    </header>
+    <div class="flight-route">
+      <div class="flight-airport"><span>出發 · DEPART</span><strong>${flight.departure.code}</strong><b>${flight.departure.name}</b><small>${flight.departure.time}</small></div>
+      <span class="flight-route-line" aria-hidden="true">→</span>
+      <div class="flight-airport flight-airport-arrival"><span>抵達 · ARRIVE</span><strong>${flight.arrival.code}</strong><b>${flight.arrival.name}</b><small>${flight.arrival.time}</small></div>
+    </div>
+    <div class="flight-summary">
+      ${summary}
+    </div>
+    <div class="flight-table-wrap">
+      <table class="flight-table">
+        <caption>${flight.passengerTableLabel || '旅客資料'}</caption>
+        <thead><tr><th scope="col">旅客</th><th scope="col">${flight.passengerDetailLabel || '票種／服務'}</th><th scope="col">${flight.passengerAmountLabel || '個人費用'}</th></tr></thead>
+        <tbody>${passengerRows}</tbody>
+      </table>
+    </div>
+    <div class="flight-totals">${breakdownRows}<div class="flight-total"><span>${flight.totalLabel || '訂單總額'}</span><strong>${flightMoney(flight.currency, flight.total)}</strong></div></div>
+    <p class="flight-note">${flight.note}</p>
+  </section>`;
 }
 
 function renderDay5Board(day, routes) {

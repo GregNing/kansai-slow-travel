@@ -154,6 +154,39 @@ button, a { -webkit-tap-highlight-color:transparent; }
 .route-notes-tips { margin-top:17px; padding-top:14px; border-top:1px solid #d9e0df; }
 .route-notes-tips ul { margin:0; padding-left:18px; color:var(--muted); font-size:10px; line-height:1.8; }
 .route-notes-tips li + li { margin-top:5px; }
+.flight-card { margin:0 0 20px; border:1px solid #cbd6d8; background:#f7f8f5; overflow:hidden; animation:rise .45s both; }
+.flight-card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:18px 19px 15px; background:#e8edf0; border-bottom:1px solid #cbd6d8; }
+.flight-card-head h3 { margin:6px 0 3px; font:600 23px/1.2 'Noto Serif TC',serif; letter-spacing:-.07em; color:var(--ink); }
+.flight-card-head h3 b { color:var(--indigo); font-family:inherit; font-weight:600; }
+.flight-card-head p { margin:0; color:#536159; font-size:11px; }
+.flight-status { flex:none; padding:5px 8px; border:1px solid #91a7ad; color:var(--indigo); font-size:9px; white-space:nowrap; }
+.flight-route { display:grid; grid-template-columns:1fr 60px 1fr; align-items:center; gap:10px; padding:19px; background:#fbfcfa; }
+.flight-airport { display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
+.flight-airport-arrival { align-items:flex-end; text-align:right; }
+.flight-airport span { color:var(--muted); font-size:8px; letter-spacing:.1em; }
+.flight-airport strong { color:var(--red); font:700 30px/1 'Noto Serif TC',serif; letter-spacing:.03em; }
+.flight-airport b { color:var(--ink); font-size:11px; font-weight:600; }
+.flight-airport small { color:var(--indigo); font:600 17px/1 'Noto Serif TC',serif; }
+.flight-route-line { color:var(--indigo); text-align:center; font-size:27px; border-top:1px solid #aebfc3; line-height:0; }
+.flight-summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:1px; margin:0 19px; background:#d7e0df; border:1px solid #d7e0df; }
+.flight-summary > div { display:flex; flex-direction:column; gap:4px; padding:11px 12px; background:#f3f5f0; }
+.flight-summary span, .flight-totals span { color:var(--muted); font-size:9px; }
+.flight-summary strong { color:var(--ink); font-size:11px; overflow-wrap:anywhere; }
+.flight-table-wrap { overflow-x:auto; margin:18px 19px 0; border:1px solid #d7e0df; }
+.flight-table { width:100%; min-width:560px; border-collapse:collapse; background:#fbfcfa; font-size:10px; }
+.flight-table caption { padding:11px 12px 8px; text-align:left; color:var(--indigo); font:600 15px 'Noto Serif TC',serif; letter-spacing:-.05em; background:#f3f5f0; }
+.flight-table th, .flight-table td { padding:9px 11px; border-top:1px solid #e1e7e2; text-align:left; vertical-align:top; }
+.flight-table thead th { color:var(--muted); font-size:9px; font-weight:500; background:#f3f5f0; }
+.flight-table tbody th { color:var(--ink); font-weight:600; white-space:nowrap; }
+.flight-table tbody td:last-child { color:var(--indigo); white-space:nowrap; text-align:right; }
+.flight-totals { display:grid; gap:0; margin:18px 19px 0; border-top:1px solid #d7e0df; }
+.flight-totals > div { display:grid; grid-template-columns:minmax(0,1fr) minmax(110px,2fr) auto; gap:16px; align-items:baseline; padding:9px 0; border-bottom:1px solid #e1e7e2; }
+.flight-totals strong { color:#536159; font-size:10px; font-weight:500; line-height:1.55; }
+.flight-totals b { color:var(--ink); font-size:12px; font-weight:600; white-space:nowrap; }
+.flight-totals .flight-total { padding:13px 0 11px; border-bottom:0; grid-template-columns:minmax(0,1fr) auto; }
+.flight-total span { color:var(--indigo); font-weight:600; }
+.flight-total strong { color:var(--red); font-size:18px; font-weight:700; }
+.flight-note { margin:0; padding:11px 19px 17px; color:var(--muted); font-size:10px; line-height:1.75; }
 @media (max-width:520px) { .parallel-note { display:block; }.parallel-note span { display:block; margin-top:3px; }.route-lane-head { padding-left:13px; padding-right:13px; } }
 @media (max-width:720px) { .timeline-board, .timeline-board.has-parallel-routes { grid-template-columns:1fr; }.day5-parallel-pair { grid-template-columns:1fr; }.route-notes-grid { grid-template-columns:1fr; } }
-@media (max-width:520px) { .route-notes-card > summary, .route-notes-body { padding-left:13px; padding-right:13px; }.route-notes-summary-copy strong { font-size:18px; }.route-notes-toggle { display:none; } }
+@media (max-width:520px) { .route-notes-card > summary, .route-notes-body { padding-left:13px; padding-right:13px; }.route-notes-summary-copy strong { font-size:18px; }.route-notes-toggle { display:none; }.flight-card-head { display:block; padding:15px 13px 13px; }.flight-status { display:inline-block; margin-top:12px; }.flight-route { grid-template-columns:minmax(0,1fr) 35px minmax(0,1fr); gap:6px; padding:16px 13px; }.flight-airport strong { font-size:27px; }.flight-airport b { font-size:10px; }.flight-airport small { font-size:15px; }.flight-summary { grid-template-columns:1fr; margin:0 13px; }.flight-summary > div { padding:9px 10px; }.flight-table-wrap, .flight-totals { margin-left:13px; margin-right:13px; }.flight-note { padding-left:13px; padding-right:13px; }.flight-totals > div { grid-template-columns:1fr; gap:3px; }.flight-totals .flight-total { grid-template-columns:1fr auto; gap:8px; } }

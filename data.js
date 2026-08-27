@@ -7,9 +7,17 @@ const TRIP_DATA = {
   description: "八天，把大阪的熱鬧與京都的安靜放進同一張地圖。早晨去看一座寺，傍晚沿著河走，剩下的交給當天的心情。",
   note: "十月關西早晚微涼；大阪十月平年日高約 23.7°C、日低約 16.0°C，京都約 23.4°C／14.4°C，舒適步行鞋、輕薄外套與摺傘優先。",
   days: [
-    { id: "day-1", short: "11", weekday: "日", label: "桃園 → 關西 → 京都", summary: "清晨出發，經關西機場前往京都。", stops: [
+    { id: "day-1", short: "11", weekday: "日", label: "桃園 → 關西 → 京都", summary: "搭乘台灣虎航 IT210 抵達關西，再前往京都。", flights: [{ direction: "去程", airline: "台灣虎航 Tigerair Taiwan", flightNumber: "IT210", status: "訂單已確認", date: "2026/10/11（日）", route: "台北（桃園） → 大阪（關西）", departure: { code: "TPE", name: "桃園國際機場", time: "06:40" }, arrival: { code: "KIX", name: "關西國際機場", time: "10:25" }, duration: "3 小時 45 分鐘", serviceLabel: "機上加值服務｜TPE–KIX", fare: { unit: 4499, quantity: 7, total: 31493 }, passengerTableLabel: "旅客與託運行李", passengerDetailLabel: "行李額度", passengerAmountLabel: "行李加購費", passengers: [
+      { name: "HSIAO HUI-WEN 小姐", detail: "無託運行李", amount: 0 },
+      { name: "HSIAO WEN-LING 小姐", detail: "預付行李重量 30 公斤", amount: 1350 },
+      { name: "LIU HAN-CHUNG 先生", detail: "無託運行李", amount: 0 },
+      { name: "JI TZE-JIUN 先生", detail: "無託運行李", amount: 0 },
+      { name: "YANG YI-HUA 小姐", detail: "預付行李重量 30 公斤", amount: 1350 },
+      { name: "WU YUE-SHIUE 先生", detail: "無託運行李", amount: 0 },
+      { name: "YANG JIE-NING 先生", detail: "無託運行李", amount: 0 }
+    ], currency: "TWD", breakdown: [{ label: "成人票價", detail: "TWD 4,499 × 7", amount: 31493 }, { label: "機上加值服務", detail: "30 公斤 × 2", amount: 2700 }], total: 34193, totalLabel: "截圖可見項目合計", note: "依虎航訂單截圖整理：IT210 於 2026/10/11 06:40 自 TPE 起飛、10:25 抵達 KIX。兩位旅客各加購 30 公斤託運行李；其餘五位未加購託運行李。截圖未完整顯示航廈、登機門與最終付款頁，因此出發前仍以虎航 App／訂位確認為準。" }], stops: [
       { time: "04:40", leave: "05:00", title: "台灣桃園第一航廈", place: "桃園國際機場第一航廈", type: "arrival", transport: "報到／登機", duration: "20 分鐘", note: "航班起飛前完成報到與行李託運。", cost: 0 },
-      { time: "06:40", leave: "10:25", title: "抵達關西機場", place: "大阪府泉佐野市泉州空港北 1", type: "arrival", transport: "國際航班", duration: "3 小時 45 分鐘", note: "航班時間與航班編號仍以訂位確認為準；本行程以 10:25 抵達第一航廈估算。", cost: 0, links: [{ label: "KIX 航班資訊", url: "https://www.kansai-airport.or.jp/en/flight/search?direction=ARR" }] },
+      { time: "06:40", leave: "10:25", title: "台灣虎航 IT210｜台北（桃園）→ 大阪（關西）", place: "大阪府泉佐野市泉州空港北 1（KIX・第1航廈）", mapQuery: "Kansai International Airport Terminal 1", type: "arrival", transport: "台灣虎航 Tigerair Taiwan", duration: "3 小時 45 分鐘", note: "去程票已確認：2026/10/11 06:40 自 TPE 起飛、10:25 抵達 KIX；詳細乘客、行李與票價請看上方航班表。", cost: 0, links: [{ label: "KIX 航班資訊", url: "https://www.kansai-airport.or.jp/en/flight/search?direction=ARR" }] },
       { time: "10:25", leave: "11:25", title: "入境・領行李・海關", place: "關西國際機場第一航廈", type: "arrival", transport: "機場內步行", duration: "1 小時", note: "國際線落地後預留入境審查、領行李與海關；若人潮較多，優先搭下一班巴士，不要為了趕車壓縮入境流程。", cost: 0, links: [{ label: "KIX 官方旅客資訊", url: "https://www.kansai-airport.or.jp/en/" }] },
       { time: "11:25", leave: "11:50", title: "購票／走到利木津巴士站", place: "關西國際機場第一航廈 1F 巴士站", type: "train", transport: "機場內步行／購票", duration: "25 分鐘", note: "先買京都線車票，再依第一航廈國際線到著層指標走到 1F 巴士站；11:50 發車是以 10:25 落地仍順利通關的保守規劃。車資在實際搭乘段計入。", cost: 0, links: [{ label: "KATE 京都線官方時刻表", url: "https://www.kate.co.jp/en/timetable/detail/KY/" }, { label: "京都線官方時刻表／乘車處", url: "https://www.keihanbus.jp/limousine/kix/limousine_kanku_kyoto.html" }] },
       { time: "11:50", leave: "13:18", title: "利木津巴士（關西機場 → 京都站）", place: "京都站八條口", type: "train", transport: "利木津巴士", duration: "1 小時 28 分鐘", note: "依 2026/3/29 起官方班表，第一航廈 11:50 發車、京都站八條口約 13:18 抵達；若入境延誤，改搭後續班次並把後面行程順延。", cost: 2800, links: [{ label: "京都線官方時刻表", url: "https://www.keihanbus.jp/limousine/kix/limousine_kanku_kyoto.html" }] },
@@ -170,7 +178,29 @@ const TRIP_DATA = {
       { time: "17:50", leave: "18:50", title: "Yodobashi Umeda", place: "大阪府大阪市北區大深町1-1", type: "shopping", transport: "步行", duration: "1 小時", note: "LUCUA 後前往 Yodobashi；兩棟相鄰但 5 分鐘仍是最低緩衝，安排最後採買，官方營業時間每日 09:30–22:00。", cost: 0, links: [{ label: "Yodobashi Umeda 官方資訊", url: "https://global.yodobashi/stores/yodobashi_camera/umeda/" }] },
       { time: "19:00", leave: "", title: "晚餐（梅田）", place: "大阪府大阪市北區梅田周邊", type: "food", transport: "步行", duration: "彈性", note: "皮革包包店巡店與 Yodobashi 後用餐，預計約 19:00 開始；店家待補，需事前選定靠近 Yodobashi／大阪站的餐廳並確認是否需要排隊。", cost: 3500 }
     ]},
-    { id: "day-8", short: "18", weekday: "日", label: "回祖國", summary: "最後採買、臨空城，再搭晚班機回家。", stops: [
+    { id: "day-8", short: "18", weekday: "日", label: "回祖國", summary: "Emma 兩人搭星宇下午班機，其餘五人搭亞洲航空晚班機回家。", flights: [
+      { direction: "回程", airline: "亞洲航空 AirAsia", flightNumber: "航班編號待補", status: "已付款", date: "2026/10/18（日）", route: "大阪（關西） → 台北（桃園）", schedule: "20:55–23:05（行程暫列）", reference: "U9JIFV", bookingDate: "2026/04/20", paymentMethod: "Visa", departure: { code: "KIX", name: "關西機場 T1", time: "20:55" }, arrival: { code: "TPE", name: "桃園國際機場 T1", time: "23:05" }, duration: "行程暫列 2 小時 10 分鐘", currency: "JPY", passengerTableLabel: "旅客資料｜U9JIFV（3 位）", passengerDetailLabel: "票種", passengerAmountLabel: "個人加購", passengers: [
+        { name: "HUI WEN HSIAO", detail: "成人", amount: null },
+        { name: "WEN LING HSIAO", detail: "成人", amount: null },
+        { name: "JIE NING YANG", detail: "成人", amount: null }
+      ], breakdown: [
+        { label: "基本費率", detail: "", amount: 51192 },
+        { label: "費用及附加費", detail: "Airport Tax JPY 10,890 ・ International Tourist Tax JPY 3,000", amount: 13890 },
+        { label: "附加服務", detail: "Processing Fee ×3 JPY 1,500 ・ Uncle Chin's Chicken Rice ×3 JPY 1,902 ・ Flight Delay Insurance ×3 JPY 963", amount: 4365 }
+      ], total: 69447, totalLabel: "訂單總額／已付", note: "依 AirAsia Move 付款明細整理：預訂代碼 U9JIFV，3 位成人，總額與已付金額均為 JPY 69,447。這張收據未顯示航班編號與完整航班時刻；20:55–23:05 是目前行程暫列，出發前請用 AirAsia 訂位頁再核對。" },
+      { direction: "回程", airline: "亞洲航空 AirAsia", flightNumber: "航班編號待補", status: "已付款", date: "2026/10/18（日）", route: "大阪（關西） → 台北（桃園）", schedule: "20:55–23:05（行程暫列）", reference: "AHMF6H", bookingDate: "2026/04/20", paymentMethod: "Visa", departure: { code: "KIX", name: "關西機場 T1", time: "20:55" }, arrival: { code: "TPE", name: "桃園國際機場 T1", time: "23:05" }, duration: "行程暫列 2 小時 10 分鐘", currency: "JPY", passengerTableLabel: "旅客資料｜AHMF6H（2 位）", passengerDetailLabel: "票種", passengerAmountLabel: "個人加購", passengers: [
+        { name: "HAN CHUNG LIU", detail: "成人", amount: null },
+        { name: "TZE JIUN JI", detail: "成人", amount: null }
+      ], breakdown: [
+        { label: "基本費率", detail: "", amount: 53600 },
+        { label: "費用及附加費", detail: "Airport Tax JPY 7,260 ・ International Tourist Tax JPY 2,000", amount: 9260 },
+        { label: "附加服務", detail: "Processing Fee ×2 JPY 1,000 ・ Flight Delay Insurance ×2 JPY 642", amount: 1642 }
+      ], total: 64502, totalLabel: "訂單總額／已付", note: "依 AirAsia Move 付款明細整理：預訂代碼 AHMF6H，2 位成人，總額與已付金額均為 JPY 64,502。這張收據未顯示航班編號與完整航班時刻；20:55–23:05 是目前行程暫列，出發前請用 AirAsia 訂位頁再核對。" },
+      { direction: "回程", airline: "星宇航空 STARLUX Airlines", flightNumber: "航班編號待補", status: "已出票", date: "2026/10/18（日）", route: "大阪（關西） → 台北（桃園）", schedule: "13:25–15:20", reference: "ORD0029858858", departure: { code: "KIX", name: "關西機場 T1", time: "13:25" }, arrival: { code: "TPE", name: "桃園國際機場 T1", time: "15:20" }, duration: "1 小時 55 分鐘", currency: "TWD", passengerTableLabel: "旅客資料｜ORD0029858858（2 位）", passengerDetailLabel: "票種", passengerAmountLabel: "個人加購", passengers: [
+        { name: "YANG/YIHUA", detail: "女・成人票", amount: null },
+        { name: "WU/YUESHIUE", detail: "男・成人票", amount: null }
+      ], breakdown: [{ label: "訂單金額", detail: "截圖未列票價拆分", amount: 13438 }], total: 13438, totalLabel: "訂單金額", note: "依星宇航空訂單截圖整理：訂單 ORD0029858858 已出票，2 位旅客，13:25 自 KIX 關西機場 T1 起飛、15:20 抵達 TPE 桃園機場 T1，訂單金額 TWD 13,438。截圖未顯示航班編號與行李額度，請以電子機票／行程資訊確認。" }
+    ], stops: [
       { time: "08:00", leave: "09:00", title: "埃斯利德飯店 – 難波東別館／Check out・寄放行李", place: "大阪府大阪市浪速區日本橋4-1-11", type: "stay", transport: "步行", duration: "1 小時", note: "官方退房時間為 10:00 前；退房後先確認是否使用飯店自助寄存處，把大件行李留在飯店再逛街。若寄存服務當日不可用，就不要拖行李走美國村，直接改成提早往臨空城。", cost: 0, links: [{ label: "埃斯利德難波東別館官方資訊", url: "https://www.eslead-hotel.com/namba-east-annex/" }, { label: "官方行李寄存／設施說明", url: "https://www.eslead-hotel.com/en/namba-east-annex/facility/" }] },
       { time: "09:10", leave: "10:20", title: "難波咖啡廳（Brooklyn Roasting × Lilo Coffee × Arabica 等）", place: "大阪府大阪市中央區難波周邊", type: "cafe", transport: "步行", duration: "1 小時 10 分鐘", note: "店家尚未指定；LiLo Coffee Kissa 週日／例假日 11:00–22:00、Arabica 難波週末／例假日 10:00–19:00，兩家都不適合 09:10。Brooklyn Roasting 官方要求以 Instagram 查最新時間；前一晚必須選定一家並確認，否則改晚出發或改便利商店早餐。", cost: 1800, links: [{ label: "Brooklyn Roasting Namba 官方資訊", url: "https://brooklynroasting.jp/location/namba/" }, { label: "LiLo Coffee Kissa 官方資訊", url: "https://coffee.liloinveve.com/pages/lilo-coffee-kissa-1?locale=ja" }, { label: "ARABIYA Coffee 官方資訊", url: "https://www.arabiyacoffee.com/access.html" }] },
       { time: "10:30", leave: "12:00", title: "美國村（古著、潮流服飾、咖啡）", place: "大阪府大阪市中央區西心齋橋 2 丁目", type: "shopping", transport: "大阪 Metro／步行", duration: "1.5 小時", note: "街區本身可自由通行；多數個別店家約 11:00 起營業，因此 10:30 可先走街景／咖啡，若要確定購物以 11:00 後為準。注意行李容量。", cost: 5000, links: [{ label: "Osaka Metro 官方", url: "https://subway.osakametro.co.jp/en/" }] },
@@ -179,8 +209,8 @@ const TRIP_DATA = {
       { time: "14:00", leave: "15:30", title: "臨空城 Premium Outlets", place: "大阪府泉佐野市りんくう往来南 3-28", type: "shopping", transport: "步行", duration: "1.5 小時", note: "官方 10:00–20:00，10/18（日）14:00 入場安全；從臨空城站步行約 5 分鐘到 Outlet，再前往機場。", cost: 0, links: [{ label: "Rinku Premium Outlets 官方", url: "https://www.premiumoutlets.co.jp/en/rinku/" }, { label: "臨空城站資訊／時刻表", url: "https://www.nankai.co.jp/en_railway/traffic/station/rinkutown.html" }] },
       { time: "15:40", leave: "16:00", title: "臨空城 → 關西機場", place: "關西國際機場", type: "train", transport: "南海電鐵／機場線", duration: "20 分鐘", note: "從臨空城站前往機場；實際乘車約數分鐘，時段包含等車與站內移動，普通票先以官方特定票價 ¥370 計。", cost: 370, links: [{ label: "南海電鐵時刻表", url: "https://www.nankai.co.jp/en_railway/access-timetable" }, { label: "臨空城站資訊／時刻表", url: "https://www.nankai.co.jp/en_railway/traffic/station/rinkutown.html" }] },
       { time: "16:00", leave: "20:55", title: "關西機場（退稅、托運、免稅店、晚餐）", place: "大阪府泉佐野市泉州空港北 1", type: "arrival", transport: "機場內步行", duration: "4 小時 55 分鐘", note: "辦理退稅、托運、安檢與免稅店；晚餐留在機場解決。", cost: 2500, links: [{ label: "關西機場官方", url: "https://www.kansai-airport.or.jp/en/" }] },
-      { time: "20:55", leave: "23:05", title: "其他旅客｜亞洲航空", place: "關西機場 → 桃園機場", type: "arrival", transport: "亞洲航空", duration: "2 小時 10 分鐘", note: "其他旅客（包含和學）搭乘的回程航班，與 Emma 的航班不同。航班編號待補；20:55 起飛，16:00 抵達機場是保守安排，仍以航空公司報到櫃檯與航班通知為準。", cost: 0 },
-      { time: "13:25", leave: "15:20", route: "emma", title: "Emma｜星宇航空", place: "關西機場 → 桃園機場", type: "arrival", transport: "星宇航空", duration: "1 小時 55 分鐘", note: "Emma 搭乘的回程航班，與其他旅客為不同班機。航班編號待補；13:25 是起飛時間，不是到機場時間，Emma 必須另行安排至少起飛前 2–3 小時抵達 KIX，不能直接跟著主線 13:00 的臨空城列車。", cost: 0 }
+      { time: "20:55", leave: "23:05", title: "其他旅客｜亞洲航空（U9JIFV／AHMF6H）", place: "大阪府泉佐野市泉州空港北 1（KIX・第1航廈）", mapQuery: "Kansai International Airport Terminal 1", type: "arrival", transport: "亞洲航空 AirAsia", duration: "行程暫列 2 小時 10 分鐘", note: "五位旅客分成 U9JIFV（3 人）與 AHMF6H（2 人）兩筆 AirAsia Move 訂單；航班編號與完整航班時刻未出現在付款收據，20:55–23:05 沿用目前行程暫列，出發前請分別打開兩筆訂位再核對。", cost: 0 },
+      { time: "13:25", leave: "15:20", route: "emma", title: "Emma｜星宇航空（ORD0029858858）", place: "大阪府泉佐野市泉州空港北 1（KIX・第1航廈）", mapQuery: "Kansai International Airport Terminal 1", type: "arrival", transport: "星宇航空 STARLUX Airlines", duration: "1 小時 55 分鐘", note: "Emma 兩人訂單 ORD0029858858 已出票：13:25 自 KIX 關西機場 T1 起飛、15:20 抵達 TPE 桃園機場 T1。這是起飛時間，不是到機場時間；Emma 必須另行安排至少起飛前 2–3 小時抵達 KIX，不能跟著主線 13:00 的臨空城列車。", cost: 0 }
     ]}
   ],
   budget: [
