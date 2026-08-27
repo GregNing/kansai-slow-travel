@@ -2,6 +2,7 @@ const state = { selectedDay: 0, completed: JSON.parse(localStorage.getItem('kans
 const $ = (id) => document.getElementById(id);
 const money = (value) => `¥${value.toLocaleString('ja-JP')}`;
 const flightMoney = (currency, value) => `${currency} ${value.toLocaleString('en-US')}`;
+const flightAnchor = (flight) => `flight-${String(flight.reference || flight.flightNumber).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 const googleMapsUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 const isGoogleMapsUrl = (url) => /google\.com\/maps|maps\.app\.goo\.gl/.test(url || '');
 const mapsUrlFor = (stop) => {
@@ -109,7 +110,7 @@ function renderFlightDetails(flight) {
   if (flight.paymentMethod) summaryItems.push(['付款方式', flight.paymentMethod]);
   const summary = summaryItems.map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`).join('');
   const flightNumber = flight.flightNumber ? `<b>${flight.flightNumber}</b>` : '';
-  return `<section class="flight-card" aria-label="${flight.airline} ${flight.flightNumber || ''} 航班詳細資訊">
+  return `<section id="${flightAnchor(flight)}" class="flight-card" aria-label="${flight.airline} ${flight.flightNumber || ''} 航班詳細資訊">
     <header class="flight-card-head">
       <div><span class="section-label">FLIGHT / 航班票券</span><h3>${flight.airline} ${flightNumber}</h3><p>${flight.direction}｜${flight.route}</p></div>
       <span class="flight-status">${flight.status}</span>
@@ -172,8 +173,14 @@ function renderStop(day, stop, originalIndex, route) {
     const checked = Boolean(state.completed[key]);
     const maps = mapsUrlFor(stop);
     const links = (stop.links || []).filter((link) => !isGoogleMapsUrl(link.url)).map((link) => `<a href="${link.url}" target="_blank" rel="noopener">${link.label} ↗</a>`).join('');
+    const linkedFlights = (stop.flightRefs || []).map((reference) => (day.flights || []).find((flight) => flight.flightNumber === reference || flight.reference === reference)).filter(Boolean);
+    const flightInfo = linkedFlights.map((flight) => {
+      const baggageCount = flight.passengers.filter((passenger) => passenger.detail.includes('30 公斤')).length;
+      const passengerSummary = `${flight.passengers.length} 位成人 · ${baggageCount ? `30 公斤託運 × ${baggageCount}` : '行李額度待確認'}`;
+      return `<div class="stop-flight-info"><span class="stop-flight-label">✈ FLIGHT DETAIL / 班機詳細</span><strong>${flight.airline} ${flight.flightNumber}</strong><span>${flight.date} · ${flight.departure.code} ${flight.departure.time} → ${flight.arrival.code} ${flight.arrival.time}</span><span>${passengerSummary} · ${flight.totalLabel || '訂單金額'} ${flightMoney(flight.currency, flight.total)}</span><a href="#${flightAnchor(flight)}">查看完整票務表 ↘</a></div>`;
+    }).join('');
     const mapLink = `<a class="place-link" href="${maps}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${stop.title}"><span class="place-link-label">⌖ Google Maps 位置 ↗</span><span class="place-link-address">${stop.place}</span></a>`;
-    return `<article class="stop ${checked ? 'completed' : ''}"><div class="stop-time"><strong>${stop.time}</strong><span>${stop.leave ? `至 ${stop.leave}` : '彈性'}</span></div><div class="timeline-line"><span class="stop-icon">${iconFor[stop.type] || '•'}</span></div><div class="stop-card"><div class="stop-top"><div><span class="stop-kind">${stop.type.toUpperCase()}</span><h3>${stop.title}</h3></div><label class="check-wrap" title="標記完成"><input type="checkbox" ${checked ? 'checked' : ''} data-key="${key}" /><span></span></label></div>${mapLink}<div class="stop-meta"><span>↝ ${stop.transport}</span><span>◷ ${stop.duration}</span></div>${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p><div class="stop-cost">預估 <b>${money(stop.cost)}</b></div></div></article>`;
+    return `<article class="stop ${checked ? 'completed' : ''}"><div class="stop-time"><strong>${stop.time}</strong><span>${stop.leave ? `至 ${stop.leave}` : '彈性'}</span></div><div class="timeline-line"><span class="stop-icon">${iconFor[stop.type] || '•'}</span></div><div class="stop-card"><div class="stop-top"><div><span class="stop-kind">${stop.type.toUpperCase()}</span><h3>${stop.title}</h3></div><label class="check-wrap" title="標記完成"><input type="checkbox" ${checked ? 'checked' : ''} data-key="${key}" /><span></span></label></div>${mapLink}${flightInfo}<div class="stop-meta"><span>↝ ${stop.transport}</span><span>◷ ${stop.duration}</span></div>${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p><div class="stop-cost">預估 <b>${money(stop.cost)}</b></div></div></article>`;
 }
 
 function renderBudget() {
