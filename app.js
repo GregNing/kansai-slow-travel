@@ -1,6 +1,7 @@
 const state = { selectedDay: 0, completed: JSON.parse(localStorage.getItem('kansai-slow-travel-completed') || '{}') };
 const $ = (id) => document.getElementById(id);
 const money = (value) => `¥${value.toLocaleString('ja-JP')}`;
+const googleMapsUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 const iconFor = { arrival: '✈', stay: '⌂', food: '⌁', train: '↝', nature: '✦', culture: '◌', cafe: '☕', fun: '★', shopping: '✳' };
 const routeMeta = {
   main: { className: 'main', eyebrow: 'MAIN ROUTE', title: '主要行程' },
@@ -46,12 +47,15 @@ function renderRouteCards() {
   const tones = ['route-card-vermillion', 'route-card-moss', 'route-card-indigo', 'route-card-sand'];
   $('route-cards').innerHTML = TRIP_DATA.days.slice(0, 4).map((day, index) => {
     const lead = day.stops[0];
-    return `<button class="route-card ${tones[index % tones.length]}" type="button" data-route-day="${index}">
-      <span class="route-card-number">${String(index + 1).padStart(2, '0')}</span>
-      <span class="route-card-mark">${iconFor[lead.type] || '•'}</span>
-      <span class="route-card-copy"><small>${day.short} / ${day.weekday} · ${lead.place.split('／')[0]}</small><strong>${day.label}</strong><em>${day.summary}</em></span>
-      <span class="route-card-arrow">↗</span>
-    </button>`;
+    return `<article class="route-card ${tones[index % tones.length]}">
+      <button class="route-card-day" type="button" data-route-day="${index}" aria-label="查看 ${day.label} 行程">
+        <span class="route-card-number">${String(index + 1).padStart(2, '0')}</span>
+        <span class="route-card-mark">${iconFor[lead.type] || '•'}</span>
+        <span class="route-card-copy"><small>${day.short} / ${day.weekday} · ${lead.place.split('／')[0]}</small><strong>${day.label}</strong><em>${day.summary}</em></span>
+        <span class="route-card-arrow">↗</span>
+      </button>
+      <a class="route-card-map" href="${googleMapsUrl(lead.mapQuery || lead.place)}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${lead.title}">⌖ Google Maps 位置 ↗</a>
+    </article>`;
   }).join('');
   document.querySelectorAll('[data-route-day]').forEach((button) => button.addEventListener('click', () => {
     state.selectedDay = Number(button.dataset.routeDay); renderTabs(); renderDay(); $('itinerary-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -124,8 +128,7 @@ function renderRouteNote(note) {
 function renderStop(day, stop, originalIndex, route) {
     const key = `${day.id}-${route}-${originalIndex}`;
     const checked = Boolean(state.completed[key]);
-    const mapQuery = stop.mapQuery || stop.place;
-    const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+    const maps = googleMapsUrl(stop.mapQuery || stop.place);
     const links = (stop.links || []).filter((link) => !/google\.com\/maps|maps\.app\.goo\.gl/.test(link.url)).map((link) => `<a href="${link.url}" target="_blank" rel="noopener">${link.label} ↗</a>`).join('');
     const mapLink = `<a class="place-link" href="${maps}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${stop.title}"><span class="place-link-label">⌖ Google Maps 位置 ↗</span><span class="place-link-address">${stop.place}</span></a>`;
     return `<article class="stop ${checked ? 'completed' : ''}"><div class="stop-time"><strong>${stop.time}</strong><span>${stop.leave ? `至 ${stop.leave}` : '彈性'}</span></div><div class="timeline-line"><span class="stop-icon">${iconFor[stop.type] || '•'}</span></div><div class="stop-card"><div class="stop-top"><div><span class="stop-kind">${stop.type.toUpperCase()}</span><h3>${stop.title}</h3></div><label class="check-wrap" title="標記完成"><input type="checkbox" ${checked ? 'checked' : ''} data-key="${key}" /><span></span></label></div>${mapLink}<div class="stop-meta"><span>↝ ${stop.transport}</span><span>◷ ${stop.duration}</span></div>${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p><div class="stop-cost">預估 <b>${money(stop.cost)}</b></div></div></article>`;
