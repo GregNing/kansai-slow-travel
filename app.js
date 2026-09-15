@@ -15,6 +15,7 @@ const routeMeta = {
   main: { className: 'main', eyebrow: 'MAIN ROUTE', title: '主要行程' },
   emma: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' },
   overprint: { className: 'emma', eyebrow: 'EMMA ROUTE', title: 'Emma 行程' },
+  yokai: { className: 'other', eyebrow: 'YOKAI ROUTE', title: '百鬼夜行路線' },
   shared: { className: 'shared', eyebrow: 'TOGETHER / 共同行程', title: '一起行動' }
 };
 const timeToMinutes = (time) => { const [hours, minutes] = time.split(':').map(Number); return hours * 60 + minutes; };
