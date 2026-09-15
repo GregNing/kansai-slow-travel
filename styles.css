@@ -229,4 +229,7 @@ button, a { -webkit-tap-highlight-color:transparent; }
   .shared-ticket-row em { justify-self: start; }
   .expense-table-wrap { margin-inline: -4px; }
   .expense-table thead th { position: static; }
+  .expense-table { width: max-content; min-width: 980px; table-layout: auto; font-size: 10px; }
+  .expense-table th, .expense-table td { padding: 8px 9px; white-space: nowrap; }
+  .expense-table th { white-space: normal; }
 }

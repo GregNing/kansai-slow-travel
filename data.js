@@ -235,8 +235,8 @@ const TRIP_DATA = {
       { label: "嵯峨野觀光小火車（成人 7 位）", total: 1259, perPerson: 180 }
     ],
     travelers: [
-      { name: "嬅", current: 14288, flight: 12816, kimono: 1472 },
-      { name: "學", current: 14288, flight: 12816, kimono: 1472 },
+      { name: "嬅", current: 13804, flight: 12816, kimono: 988 },
+      { name: "學", current: 14773, flight: 12816, kimono: 1957 },
       { name: "甯", current: 13031, flight: 11074, kimono: 1957 },
       { name: "Y", current: 12062, flight: 11074, kimono: 988 },
       { name: "紀", current: 13261, flight: 11304, kimono: 1957 },
