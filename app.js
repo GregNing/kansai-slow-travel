@@ -180,11 +180,28 @@ function renderStop(day, stop, originalIndex, route) {
       return `<div class="stop-flight-info"><span class="stop-flight-label">✈ FLIGHT DETAIL / 班機詳細</span><strong>${flight.airline} ${flight.flightNumber}</strong><span>${flight.date} · ${flight.departure.code} ${flight.departure.time} → ${flight.arrival.code} ${flight.arrival.time}</span><span>${passengerSummary} · ${flight.totalLabel || '訂單金額'} ${flightMoney(flight.currency, flight.total)}</span><a href="#${flightAnchor(flight)}">查看完整票務表 ↘</a></div>`;
     }).join('');
     const mapLink = `<a class="place-link" href="${maps}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${stop.title}"><span class="place-link-label">⌖ Google Maps 位置 ↗</span><span class="place-link-address">${stop.place}</span></a>`;
-    return `<article class="stop ${checked ? 'completed' : ''}"><div class="stop-time"><strong>${stop.time}</strong><span>${stop.leave ? `至 ${stop.leave}` : '彈性'}</span></div><div class="timeline-line"><span class="stop-icon">${iconFor[stop.type] || '•'}</span></div><div class="stop-card"><div class="stop-top"><div><span class="stop-kind">${stop.type.toUpperCase()}</span><h3>${stop.title}</h3></div><label class="check-wrap" title="標記完成"><input type="checkbox" ${checked ? 'checked' : ''} data-key="${key}" /><span></span></label></div>${mapLink}${flightInfo}<div class="stop-meta"><span>↝ ${stop.transport}</span><span>◷ ${stop.duration}</span></div>${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p><div class="stop-cost">預估 <b>${money(stop.cost)}</b></div></div></article>`;
+    const paidCost = stop.paidCost ? `<span class="stop-paid">${stop.paidLabel || '已付款'} <b>${stop.paidCurrency === 'TWD' ? 'NT$' : stop.paidCurrency}${stop.paidCost.toLocaleString('zh-TW')}</b></span>` : '';
+    return `<article class="stop ${checked ? 'completed' : ''}"><div class="stop-time"><strong>${stop.time}</strong><span>${stop.leave ? `至 ${stop.leave}` : '彈性'}</span></div><div class="timeline-line"><span class="stop-icon">${iconFor[stop.type] || '•'}</span></div><div class="stop-card"><div class="stop-top"><div><span class="stop-kind">${stop.type.toUpperCase()}</span><h3>${stop.title}</h3></div><label class="check-wrap" title="標記完成"><input type="checkbox" ${checked ? 'checked' : ''} data-key="${key}" /><span></span></label></div>${mapLink}${flightInfo}<div class="stop-meta"><span>↝ ${stop.transport}</span><span>◷ ${stop.duration}</span></div>${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p><div class="stop-cost">預估 <b>${money(stop.cost)}</b>${paidCost}</div></div></article>`;
 }
 
 function renderBudget() {
   $('budget-grid').innerHTML = TRIP_DATA.budget.map((item) => `<div class="budget-card ${item.tone}"><div class="budget-icon">${item.icon}</div><div><span>${item.label}</span><strong>${money(item.amount)}</strong></div></div>`).join('');
+  const expenses = TRIP_DATA.personalExpenses;
+  const sharedTotal = expenses.sharedTickets.reduce((sum, ticket) => sum + ticket.perPerson, 0);
+  const splitLodging = expenses.splitLodging;
+  const splitLodgingLabel = splitLodging.label.replace('（', '<br>（');
+  const usjTicket = expenses.usjTicket;
+  const sharedRows = expenses.sharedTickets.map((ticket) => `<div class="shared-ticket-row"><span>${ticket.label}</span><b>NT$ ${ticket.total.toLocaleString('zh-TW')}</b><em>均攤 NT$ ${ticket.perPerson.toLocaleString('zh-TW')}／人</em></div>`).join('');
+  const travelerRows = expenses.travelers.map((traveler) => {
+    const personalSubtotal = (traveler.flight || 0) + (traveler.kimono || 0) + (traveler.other || 0);
+    const splitLodgingAmount = splitLodging.excluded.includes(traveler.name) ? 0 : splitLodging.perPerson;
+    const luluSubtotal = personalSubtotal + expenses.lodgingPerPerson;
+    const usjAmount = usjTicket.excluded.includes(traveler.name) ? 0 : usjTicket.perPerson;
+    const ningSubtotal = usjAmount + splitLodgingAmount + sharedTotal;
+    const total = luluSubtotal + ningSubtotal;
+    return `<tr><th scope="row">${traveler.name}</th><td>NT$ ${(traveler.flight || 0).toLocaleString('zh-TW')}</td><td>NT$ ${(traveler.kimono || 0).toLocaleString('zh-TW')}</td><td>NT$ ${expenses.lodgingPerPerson.toLocaleString('zh-TW')}</td><td>NT$ ${luluSubtotal.toLocaleString('zh-TW')}</td><td>${usjAmount ? `NT$ ${usjAmount.toLocaleString('zh-TW')}` : '—'}</td><td>${splitLodgingAmount ? `NT$ ${splitLodgingAmount.toLocaleString('zh-TW')}` : '—'}</td><td>NT$ ${sharedTotal.toLocaleString('zh-TW')}</td><td class="payer-subtotal">NT$ ${ningSubtotal.toLocaleString('zh-TW')}</td><td><strong>NT$ ${total.toLocaleString('zh-TW')}</strong></td></tr>`;
+  }).join('');
+  $('personal-expenses').innerHTML = `<section class="personal-expenses"><div class="section-label">PERSONAL SPLIT / 個人分攤</div><h3>每個人目前應分攤</h3><p class="expense-note">機票、和服與原住宿列在 ${expenses.currentPayer} 先出；${splitLodging.label}、船票、火車票與 USJ 門票列在 ${usjTicket.payer} 先出。USJ 門票總額 NT$${usjTicket.total.toLocaleString('zh-TW')}，由 5 人均分 NT$${usjTicket.perPerson.toLocaleString('zh-TW')}（不含嬅、學）。${splitLodging.label}總額 NT$${splitLodging.total.toLocaleString('zh-TW')}，每人 NT$${splitLodging.perPerson.toLocaleString('zh-TW')}（不含 L、中）。</p><div class="shared-ticket-split">${sharedRows}</div><div class="expense-table-wrap"><table class="expense-table"><thead><tr><th>旅客</th><th>機票</th><th>和服</th><th>住宿</th><th>${expenses.currentPayer}先出小計</th><th>USJ門票</th><th>${splitLodgingLabel}</th><th>船票＋火車票</th><th>${usjTicket.payer}先出小計</th><th>總花費</th></tr></thead><tbody>${travelerRows}</tbody></table></div></section>`;
 }
 
 function renderUtilitySections() {

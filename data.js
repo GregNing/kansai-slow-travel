@@ -33,10 +33,10 @@ const TRIP_DATA = {
       { time: "07:10", leave: "07:30", title: "JR 京都站", place: "京都府京都市下京區東鹽小路町", type: "train", transport: "步行／JR 嵯峨野線", duration: "20 分鐘", note: "從京都新阪急飯店步行到 JR 京都站；進 JR 閘門後依「山陰本線／嵯峨野線（Sagano Line）」「園部・龜岡方向」指標找月台。這裡不是搭新幹線，預留時間給找在來線月台與看電子看板。", cost: 240, links: [{ label: "JR West 路線・時刻表", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }] },
       { time: "07:34", leave: "07:59", title: "JR 嵯峨嵐山站（要轉搭小火車）", place: "京都府京都市右京區嵯峨天龍寺車道町 11-1", type: "train", transport: "JR 山陰本線", duration: "25 分鐘", note: "目前 JR West 車站時刻資料可作為 07:34–07:59 的規劃參考；搭往園部／龜岡方向，中途不用換車，在 JR 嵯峨嵐山站下車。10/12 的確切車次、月台與臨時變更要在出發前按日期重查。出 JR 閘口後跟「嵯峨野觀光鐵道／トロッコ嵯峨站」指標步行約 5 分鐘，不要把小火車嵯峨站和 JR 站混成同一個月台。", cost: 0, links: [{ label: "JR West 路線・日期查詢", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }, { label: "JR West 車站時刻表", url: "https://timetable.jr-odekake.net/" }] },
       { time: "08:05", leave: "09:00", title: "嵯峨站轉乘／取票候車", place: "嵯峨野觀光鐵道 嵯峨站", type: "train", transport: "步行／取票／候車", duration: "55 分鐘", note: "這不是 JR 轉車，而是從 JR 嵯峨嵐山站出閘後步行到旁邊的嵯峨野觀光鐵道嵯峨站；官方同日售票約 08:35 開始，預約客依票面時間報到。", cost: 0, links: [{ label: "官方票券說明", url: "https://www.sagano-kanko.co.jp/en/ticket/" }] },
-      { time: "09:02", leave: "09:25", title: "嵯峨野觀光小火車（嵯峨 → 龜岡）", place: "嵯峨野觀光鐵道 嵯峨站", type: "train", transport: "嵯峨野觀光小火車", duration: "23 分鐘", note: "改用 2026 官方時刻表首班：嵯峨 09:02 出發、龜岡 09:25 抵達；原 08:30 時間早於官方首班。", cost: 880, links: [{ label: "官方時刻表／預約", url: "https://www.sagano-kanko.co.jp/en/index.php/" }] },
+      { time: "09:02", leave: "09:25", title: "嵯峨野觀光小火車（嵯峨 → 龜岡）", place: "嵯峨野觀光鐵道 嵯峨站", type: "train", transport: "嵯峨野觀光小火車", duration: "23 分鐘", note: "改用 2026 官方時刻表首班：嵯峨 09:02 出發、龜岡 09:25 抵達；原 08:30 時間早於官方首班。已購買 2026/10/12 成人 7 位，付款金額 JPY 6,160（記錄金額 NT$1,259）。", cost: 880, paidCost: 1259, paidCurrency: "TWD", paidLabel: "已付款（成人 7 位）", links: [{ label: "官方時刻表／預約", url: "https://www.sagano-kanko.co.jp/en/index.php/" }] },
       { time: "09:35", leave: "09:45", title: "接駁至保津川遊船乘船處", place: "京都府龜岡市篠町山本地區", type: "nature", transport: "保津川遊船接駁巴士", duration: "10 分鐘", note: "依保津川官方小火車銜接例安排接駁；龜岡站前巴士約 10 分鐘、約每小時 :35 發車，2026/3/1 起成人車資 ¥500；務必抵達後立刻去巴士站，錯過可能趕不上 10:00 遊船。", cost: 500, links: [{ label: "官方預約銜接說明", url: "https://www.hozugawakudari.jp/tickets/reservation" }, { label: "官方交通／巴士說明", url: "https://www.hozugawakudari.jp/emergency/42255" }] },
       { time: "09:45", leave: "09:55", title: "保津川遊船報到", place: "保津川遊船乘船場", type: "nature", transport: "步行／報到", duration: "10 分鐘", note: "10:00 預約時段前完成報到；10/12 是日本運動日國定假日，也是 10/10–10/12 三日連休最後一天，假日採隨時／人數到齊開船，實際出航仍以官方當日安排為準。", cost: 0, links: [{ label: "官方時刻表", url: "https://www.hozugawakudari.jp/service/timetable" }] },
-      { time: "10:00", leave: "12:00", title: "保津川遊船（出發）", place: "保津川遊船乘船場", type: "nature", transport: "保津川遊船", duration: "2 小時", note: "官方明確以小火車約 1 小時後銜接：09:02→09:25→09:35–09:45 接駁→10:00–10:30 預約船；10/12 假日為約 24 人到齊即隨時出發，務必先訂位並在 10:00 前到受付。暴風雨或河川增水可能停航。", cost: 6000, links: [{ label: "官方預約銜接說明", url: "https://www.hozugawakudari.jp/tickets/reservation" }, { label: "官方時刻表", url: "https://www.hozugawakudari.jp/service/timetable" }] },
+      { time: "10:00", leave: "12:00", title: "保津川遊船（出發）", place: "保津川遊船乘船場", type: "nature", transport: "保津川遊船", duration: "2 小時", note: "官方明確以小火車約 1 小時後銜接：09:02→09:25→09:35–09:45 接駁→10:00–10:30 預約船；10/12 假日為約 24 人到齊即隨時出發，務必先訂位並在 10:00 前到受付。暴風雨或河川增水可能停航。已購買 2026/10/12 10:00 成人 7 位，訂單金額 NT$8,589。", cost: 6000, paidCost: 8589, paidCurrency: "TWD", paidLabel: "已付款（成人 7 位）", links: [{ label: "官方預約銜接說明", url: "https://www.hozugawakudari.jp/tickets/reservation" }, { label: "官方時刻表", url: "https://www.hozugawakudari.jp/service/timetable" }] },
       { time: "12:00", leave: "12:10", title: "抵達嵐山渡船口／渡月橋附近", place: "京都府京都市右京區嵯峨中之島町", type: "nature", transport: "步行", duration: "10 分鐘", note: "下船後前往午餐。", cost: 0 },
       { time: "12:15", leave: "12:55", title: "和牛火山おあがり 嵐山本店（午餐）", place: "〒616-8384 京都府京都市右京區天龍寺造路町 31-7", mapQuery: "和牛火山おあがり 嵐山本店 京都市右京区天竜寺造路町31番7", type: "food", transport: "步行", duration: "40 分鐘", note: "官方營業時間 10:30–18:30（L.O. 18:00），全年無休；地址為〒616-8384 京都府京都市右京區天龍寺造路町 31-7，渡月橋步行約 3 分鐘。午餐時段熱門，建議先預約，未預約可能候位最長約 1 小時。若兩間和牛店都要吃，這裡只能快吃，最穩的安排其實是兩間二選一。", cost: 4500, links: [{ label: "OAGARI 官方店舖資訊／預約", url: "https://oagari.com/oagari-arashiyama/" }] },
       { time: "13:05", leave: "13:30", title: "京都嵐山 和牛 六重亭", place: "京都府京都市右京區嵯峨天龍寺芒之馬場町 3-25-2 嵐山スクエア 1F", mapQuery: "京都嵐山 和牛 六重亭 京都市右京区嵯峨天竜寺芒ノ馬場町3-25-2 嵐山スクエア1F", type: "food", transport: "步行", duration: "25 分鐘", note: "店名與地址已校正；公開店舖資料為 10:00–19:00（料理 L.O. 18:00）、不定休，且目前資料標示不可預約。13:05 可入店，但 25 分鐘只適合快速品嚐。兩間餐廳都要吃時必須先確認現場候位，並把它當成二選一中的第二順位，不適合安排成完整第二頓午餐。", cost: 1500, links: [{ label: "六重亭店舖資訊", url: "https://tabelog.com/kyoto/A2601/A260403/26038516/" }] },
@@ -223,6 +223,27 @@ const TRIP_DATA = {
     { label: "餐費", key: "food", amount: 34200, icon: "⌁", tone: "orange" },
     { label: "門票／購物／彈性", key: "shopping", amount: 32600, icon: "✳", tone: "green" }
   ],
+  personalExpenses: {
+    lodgingPerPerson: 8704,
+    usjTicket: { total: 11925, people: 5, perPerson: 2385, payer: "甯", excluded: ["嬅", "學"] },
+    splitLodging: { label: "10/11 住宿（5 人均分）", total: 7741.79, people: 5, perPerson: 1548, excluded: ["L", "中"] },
+    currentPayer: "Lulu（L）",
+    lodgingPayer: "Lulu（L）",
+    sharedPayer: "甯",
+    sharedTickets: [
+      { label: "保津川遊船（成人 7 位）", total: 8589, perPerson: 1227 },
+      { label: "嵯峨野觀光小火車（成人 7 位）", total: 1259, perPerson: 180 }
+    ],
+    travelers: [
+      { name: "嬅", current: 14288, flight: 12816, kimono: 1472 },
+      { name: "學", current: 14288, flight: 12816, kimono: 1472 },
+      { name: "甯", current: 13031, flight: 11074, kimono: 1957 },
+      { name: "Y", current: 12062, flight: 11074, kimono: 988 },
+      { name: "紀", current: 13261, flight: 11304, kimono: 1957 },
+      { name: "中", current: 13261, flight: 11304, kimono: 1957 },
+      { name: "L", current: 11387, flight: 10399, kimono: 988 }
+    ]
+  },
   reminders: [
     { title: "入境前｜Visit Japan Web", text: "先完成入境與海關資料，將 QR code 截圖並保存在離線相簿；護照姓名、航班與住宿資料要完全一致。", links: [{ label: "官方入境服務", url: "https://www.digital.go.jp/en/policies/visit_japan_web" }] },
     { title: "交通日｜先看官方時刻表", text: "JR、京都地下鐵、Osaka Metro、南海電鐵與勝尾寺直行巴士都要在出發前再查一次；行程表的時間是規劃值，不代表已完成訂位。", links: [{ label: "JR West 時刻表", url: "https://www.westjr.co.jp/global/en/timetable/search_jp/" }, { label: "京都市營地下鐵時刻表", url: "https://www2.city.kyoto.lg.jp/kotsu/tikadia/tikatime.htm?iframe=true" }, { label: "Osaka Metro 梅田站時刻表", url: "https://subway.osakametro.co.jp/en/station_guide/M/m16/joukouichi.php" }, { label: "南海電鐵時刻表", url: "https://www.nankai.co.jp/en_railway/access-timetable" }, { label: "勝尾寺直行巴士時刻表", url: "https://katsuo-ji-temple.or.jp/access/index.php" }] },
@@ -271,3 +292,53 @@ const TRIP_DATA = {
     { label: "住宿／保險／同行者", value: "請補上個人資料", action: "#" }
   ]
 };
+
+// 2026/09/15 票券與個人費用更新：以最新訂單／分帳資料覆蓋前版暫估值。
+const outboundFlight = TRIP_DATA.days[0].flights?.find((flight) => flight.flightNumber === 'IT210');
+if (outboundFlight) {
+  outboundFlight.fare = { unit: 5399, quantity: 7, total: 37793 };
+  outboundFlight.passengers = outboundFlight.passengers.map((passenger) => ({ ...passenger, detail: passenger.detail.includes('30 公斤') ? '合併托運 30 公斤；手提 10 公斤' : '無托運行李；手提 10 公斤', amount: passenger.detail.includes('30 公斤') ? 6074 : 5399 }));
+  outboundFlight.breakdown = [
+    { label: '無托運票價', detail: 'TWD 5,399 × 5', amount: 26995 },
+    { label: '含托運票價', detail: 'TWD 6,074 × 2（合併托運 30 公斤 × 2）', amount: 12148 }
+  ];
+  outboundFlight.total = 39143;
+  outboundFlight.totalLabel = '訂單金額（目前整理）';
+  outboundFlight.note = '去程 IT210：2026/10/11 06:40 由桃園機場第二航廈起飛，10:25 抵達關西機場第一航廈。每人手提行李限重 10 公斤；Yoko 與傑合併托運 30 公斤、嬅與學合併托運 30 公斤，托運不限件數。無托運票價每人 NT$5,399，含托運票價每人 NT$6,074；目前整理總額 NT$39,143。';
+}
+const returnFlights = TRIP_DATA.days.at(-1).flights || [];
+const starluxFlight = returnFlights.find((flight) => flight.reference === 'ORD0029858858');
+if (starluxFlight) {
+  starluxFlight.total = 13483;
+  starluxFlight.breakdown = [{ label: '訂單金額', detail: '嬅、學 2 位；每人托運限 1 件 23 公斤，手提 7 公斤', amount: 13483 }];
+  starluxFlight.note = '嬅、學搭乘關西機場第一航廈星宇航空 13:25 班機；每人托運限 1 件 23 公斤，手提 7 公斤。訂單總金額 NT$13,483。';
+}
+const airAsiaTotal = returnFlights.filter((flight) => flight.airline.includes('AirAsia')).reduce((sum, flight) => sum + flight.total, 0);
+returnFlights.filter((flight) => flight.airline.includes('AirAsia')).forEach((flight) => {
+  flight.note = `L、Y、甯、 中、紀搭乘關西機場第一航廈亞洲航空 D7379 20:55 班機；共 80 公斤托運、不限件數，各自手提 7 公斤。兩筆訂單合計 JPY ${airAsiaTotal.toLocaleString('ja-JP')}，刷卡折合 NT$26,810；中、紀各 NT$5,905，L、Y、甯各 NT$5,000。`;
+});
+
+const usjTicketStop = TRIP_DATA.days.find((day) => day.id === 'day-6')?.stops.find((stop) => stop.title.includes('園前集合'));
+if (usjTicketStop) {
+  usjTicketStop.paidCost = 11925;
+  usjTicketStop.paidCurrency = 'TWD';
+  usjTicketStop.paidLabel = 'USJ 門票已付款（5 位成人）';
+  usjTicketStop.note = `${usjTicketStop.note} 訂單 RCV058972：2026/10/16 日本環球影城 1 日券，5 位成人，已付款 NT$11,925。`;
+}
+
+// 2026/09/15 景點日期與天候查核結果。
+const tojiStop = TRIP_DATA.days[0].stops.find((stop) => stop.title.includes('東寺'));
+if (tojiStop) tojiStop.note = tojiStop.note.replace('9/20–10/30', '9/20–11/25');
+const weatherReminder = TRIP_DATA.reminders.find((item) => item.title === '2026/10｜天氣目前只能看趨勢');
+if (weatherReminder) weatherReminder.text = weatherReminder.text.replace('截至 2026/8/27', '截至 2026/9/15');
+TRIP_DATA.reminders.unshift({
+  title: '2026/09/15｜主要景點日期查核',
+  text: '已按行程日期初步核對：10/11 東寺位於 9/20–11/25 秋期特別公開期間；10/12 嵯峨野小火車有 09:02 班次，保津川遊船已訂 10:00；10/13 清水寺為一般參拜日，秋季夜間特別拝観是 11/21–11/30，不在本行程；10/14 二條城週三正常開城；10/15 勝尾寺、10/16 USJ、10/17 木津市場、10/18 臨空城仍要在出發前再確認當日公告。10/11–10/18 逐日天氣目前尚未進入可靠預報窗口，先依京都／大阪 10 月平年值規劃。',
+  links: [
+    { label: '東寺 2026 開放日程', url: 'https://toji.or.jp/en/location/index.html' },
+    { label: '嵯峨野小火車 2026 時刻表', url: 'https://www.sagano-kanko.co.jp/en/wp-content/uploads/sites/2/2026%E5%B9%B4%E5%88%97%E8%BB%8A%E9%81%8B%E8%BB%BB%E6%99%82%E5%88%BB%E8%A1%A8%E8%8B%B1-1.pdf' },
+    { label: '清水寺 2026 行事日程', url: 'https://www.kiyomizudera.or.jp/en/visit/' },
+    { label: '二條城官方開放時間', url: 'https://nijo-jocastle.city.kyoto.lg.jp/?lang=en' },
+    { label: '京都／大阪 JMA 天氣預報', url: 'https://www.jma.go.jp/bosai/forecast/' }
+  ]
+});

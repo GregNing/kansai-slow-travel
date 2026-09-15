@@ -31,6 +31,7 @@ body { margin:0; background:#dfe4da; color:var(--ink); font-family:'DM Mono', ui
 .stop-cost { position:static; margin-top:10px; padding-top:8px; border-top:1px solid #ece8df; }
 .stop-time { min-width:0; }.stop-time strong { white-space:nowrap; font-size:14px; }
 @media (max-width:520px) { .stop { grid-template-columns:60px 25px minmax(0,1fr); } }
+.personal-expenses { margin-top:28px; border-top:1px solid var(--line); padding-top:20px; }.personal-expenses h3 { margin:6px 0 3px; font:600 22px 'Noto Serif TC',serif; }.expense-note { margin:0 0 13px; color:var(--muted); font-size:10px; }.shared-ticket-split { display:flex; flex-direction:column; gap:1px; margin:13px 0 15px; background:#d7e0df; border:1px solid #d7e0df; }.shared-ticket-row { display:grid; grid-template-columns:max-content auto 1fr; align-items:baseline; gap:18px; padding:9px 11px; background:#f3f5f0; font-size:10px; }.shared-ticket-row b,.shared-ticket-row em { color:var(--red); font-weight:600; font-style:normal; white-space:nowrap; }.shared-ticket-row em { justify-self:end; }.expense-table-wrap { overflow-x:auto; border:1px solid #d7e0df; }.expense-table { width:100%; min-width:620px; border-collapse:collapse; background:#fbfcfa; font-size:10px; }.expense-table th,.expense-table td { padding:10px 11px; border-top:1px solid #e1e7e2; text-align:right; white-space:nowrap; }.expense-table thead th { color:var(--muted); font-size:9px; font-weight:500; background:#f3f5f0; }.expense-table th:first-child,.expense-table td:first-child { text-align:left; }.expense-table tbody th { font-weight:600; }.expense-table td small { display:none; }.expense-table strong { color:var(--red); }
 .stop-time { padding-right:22px; transform:translateX(-8px); }
 .stop-time span { font-size:14px; line-height:1.4; color:var(--ink); font-weight:700; }
 .tab-panel[hidden] { display:none !important; }
@@ -196,3 +197,36 @@ button, a { -webkit-tap-highlight-color:transparent; }
 .stop-flight-info a { justify-self:start; margin-top:3px; color:var(--blue); font-size:9px; text-decoration:none; border-bottom:1px dotted var(--blue); }
 .stop-flight-info a:hover { color:var(--red); border-color:var(--red); }
 @media (max-width:520px) { .stop-flight-info { padding:9px 9px 8px; font-size:9px; }.stop-flight-info strong { font-size:13px; } }
+/* Expense summary refinements: keep payer subtotals visually distinct and readable on mobile. */
+.personal-expenses {
+  padding: clamp(20px, 3vw, 34px);
+  background: linear-gradient(135deg, rgba(243, 245, 240, .72), rgba(251, 249, 244, .96));
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--red);
+  border-radius: 3px;
+}
+.personal-expenses h3 { margin-top: 8px; }
+.expense-note { max-width: 1180px; line-height: 1.8; }
+.shared-ticket-split { border-radius: 3px; overflow: hidden; }
+.shared-ticket-row { min-height: 42px; }
+.expense-table-wrap { border-radius: 3px; box-shadow: 0 8px 20px rgba(30, 41, 39, .05); }
+.expense-table { width: 100%; min-width: 0; table-layout: fixed; font-size: 9px; }
+.expense-table th, .expense-table td { padding: 6px 5px; white-space: normal; }
+.expense-table td { white-space: nowrap; }
+.expense-table th:first-child, .expense-table td:first-child { padding-left: 9px; padding-right: 7px; }
+.expense-table th:last-child, .expense-table td:last-child { padding-left: 7px; padding-right: 9px; }
+.expense-table thead th { position: sticky; top: 0; z-index: 1; letter-spacing: .04em; }
+.expense-table tbody tr:nth-child(even) { background: rgba(243, 245, 240, .42); }
+.expense-table tbody tr:hover { background: rgba(211, 225, 221, .42); }
+.expense-table td:nth-child(5), .expense-table th:nth-child(5),
+.expense-table td:nth-child(9), .expense-table th:nth-child(9) { background: rgba(221, 233, 228, .34); }
+.expense-table td:nth-child(9) { font-weight: 600; color: var(--red); }
+.expense-table td:last-child, .expense-table th:last-child { background: rgba(197, 75, 51, .08); }
+@media (max-width: 720px) {
+  .personal-expenses { padding: 16px 12px; }
+  .expense-note { font-size: 11px; }
+  .shared-ticket-row { grid-template-columns: 1fr; gap: 3px; }
+  .shared-ticket-row em { justify-self: start; }
+  .expense-table-wrap { margin-inline: -4px; }
+  .expense-table thead th { position: static; }
+}
