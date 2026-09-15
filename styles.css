@@ -227,9 +227,9 @@ button, a { -webkit-tap-highlight-color:transparent; }
   .expense-note { font-size: 11px; }
   .shared-ticket-row { grid-template-columns: 1fr; gap: 3px; }
   .shared-ticket-row em { justify-self: start; }
-  .expense-table-wrap { margin-inline: -4px; }
+  .expense-table-wrap { width: 100%; margin-inline: -4px; overflow-x: scroll; -webkit-overflow-scrolling: touch; }
   .expense-table thead th { position: static; }
-  .expense-table { width: max-content; min-width: 980px; table-layout: auto; font-size: 10px; }
+  .expense-table { width: 980px !important; min-width: 980px !important; table-layout: auto; font-size: 10px; }
   .expense-table th, .expense-table td { padding: 8px 9px; white-space: nowrap; }
   .expense-table th { white-space: normal; }
 }
