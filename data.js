@@ -202,10 +202,10 @@ const TRIP_DATA = {
         { label: "費用及附加費", detail: "Airport Tax JPY 7,260 ・ International Tourist Tax JPY 2,000", amount: 9260 },
         { label: "附加服務", detail: "Processing Fee ×2 JPY 1,000 ・ Flight Delay Insurance ×2 JPY 642", amount: 1642 }
       ], total: 64502, totalLabel: "訂單總額／已付", note: "依 AirAsia Move 收據與訂位畫面整理：預訂代碼 AHMF6H，2 位成人，總額與已付金額均為 JPY 64,502；訂位畫面確認航班 D7379，2026/10/18 20:55 自 KIX 起飛、23:05 抵達 TPE。" },
-      { direction: "回程", airline: "星宇航空 STARLUX Airlines", flightNumber: "航班編號待補", status: "已出票", date: "2026/10/18（日）", route: "大阪（關西） → 台北（桃園）", schedule: "13:25–15:20", reference: "ORD0029858858", departure: { code: "KIX", name: "關西機場 T1", time: "13:25" }, arrival: { code: "TPE", name: "桃園國際機場 T1", time: "15:20" }, duration: "約 2 小時 55 分鐘（時差校正）", currency: "TWD", passengerTableLabel: "旅客資料｜ORD0029858858（2 位）", passengerDetailLabel: "票種", passengerAmountLabel: "個人加購", passengers: [
+      { direction: "回程", airline: "星宇航空 STARLUX Airlines", flightNumber: "JX821", status: "已出票", date: "2026/10/18（日）", route: "大阪（關西） → 台北（桃園）", schedule: "13:25–15:20", reference: "ORD0029858858", departure: { code: "KIX", name: "關西機場 T1", time: "13:25" }, arrival: { code: "TPE", name: "桃園國際機場 T1", time: "15:20" }, duration: "約 2 小時 55 分鐘（時差校正）", currency: "TWD", passengerTableLabel: "旅客資料｜ORD0029858858（2 位）", passengerDetailLabel: "票種", passengerAmountLabel: "個人加購", passengers: [
         { name: "YANG/YIHUA", detail: "女・成人票", amount: null },
         { name: "WU/YUESHIUE", detail: "男・成人票", amount: null }
-      ], breakdown: [{ label: "訂單金額", detail: "截圖未列票價拆分", amount: 13438 }], total: 13438, totalLabel: "訂單金額", note: "依星宇航空訂單截圖整理：訂單 ORD0029858858 已出票，2 位旅客，13:25 自 KIX 關西機場 T1 起飛、15:20 抵達 TPE 桃園機場 T1，訂單金額 TWD 13,438。截圖未顯示航班編號與行李額度，請以電子機票／行程資訊確認。Emma 建議 08:00 退房，搭計程車到南海難波，目標搭乘 09:05 左右的 Rapi:t；實際班次與航班資訊出發前再確認。" }
+      ], breakdown: [{ label: "訂單金額", detail: "截圖未列票價拆分", amount: 13438 }], total: 13438, totalLabel: "訂單金額", note: "依星宇航空訂單截圖整理：訂單 ORD0029858858 已出票，2 位旅客搭乘 JX821，13:25 自 KIX 關西機場 T1 起飛、15:20 抵達 TPE 桃園機場 T1，訂單金額 TWD 13,438。截圖未顯示行李額度，請以電子機票／行程資訊確認。Emma 建議 08:00 退房，搭計程車到南海難波，目標搭乘 09:05 左右的 Rapi:t；實際班次與航班資訊出發前再確認。" }
     ], stops: [
       { time: "08:00", leave: "08:20", route: "emma", title: "Emma｜飯店退房・取回行李", place: "埃斯利德飯店 – 難波東別館／大阪府大阪市浪速區日本橋4-1-17", type: "stay", transport: "步行／自助退房", duration: "20 分鐘", note: "Emma 兩人不寄放行李，先完成退房並取回全部行李；確認護照、星宇電子機票、手機與充電用品都在隨身包。飯店官方退房時間為 10:00 前，但為了 13:25 航班建議 08:20 前離開。", cost: 0, links: [{ label: "埃斯利德難波東別館官方資訊", url: "https://www.eslead-hotel.com/en/namba-east-annex/" }] },
       { time: "08:20", leave: "08:40", route: "emma", title: "飯店 → 南海難波站", place: "埃斯利德飯店 – 難波東別館 → 南海難波站", type: "train", transport: "計程車／步行進站", duration: "約 20 分鐘", note: "帶行李建議直接搭計程車到南海難波站，請司機目的地說「南海難波站／南海電鐵難波站」。不要走到 Osaka Metro 難波或 JR 難波；三者不是同一個站體。若計程車不方便，才改步行前往 Osaka Metro 惠美須町／日本橋再轉乘，但會增加搬行李與迷路風險。", cost: 1500, links: [{ label: "南海難波站官方資訊", url: "https://www.nankai.co.jp/en_railway/traffic/station/namba.html" }] },
@@ -315,9 +315,9 @@ if (outboundFlight) {
 const returnFlights = TRIP_DATA.days.at(-1).flights || [];
 const starluxFlight = returnFlights.find((flight) => flight.reference === 'ORD0029858858');
 if (starluxFlight) {
-  starluxFlight.total = 13483;
-  starluxFlight.breakdown = [{ label: '訂單金額', detail: '嬅、學 2 位；每人托運限 1 件 23 公斤，手提 7 公斤', amount: 13483 }];
-  starluxFlight.note = '嬅、學搭乘關西機場第一航廈星宇航空 13:25 班機；每人托運限 1 件 23 公斤，手提 7 公斤。訂單總金額 NT$13,483。';
+  starluxFlight.total = 13438;
+  starluxFlight.breakdown = [{ label: '訂單金額', detail: '訂單截圖可見金額；行李額度待確認', amount: 13438 }];
+  starluxFlight.note = '嬅、學搭乘關西機場第一航廈星宇航空 JX821，13:25 班機；訂單 ORD0029858858 金額 NT$13,438。截圖未顯示行李額度，請以電子機票／行程資訊確認。';
 }
 const airAsiaTotal = returnFlights.filter((flight) => flight.airline.includes('AirAsia')).reduce((sum, flight) => sum + flight.total, 0);
 returnFlights.filter((flight) => flight.airline.includes('AirAsia')).forEach((flight) => {
