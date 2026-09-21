@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+TC:wght@500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap');
 :root { --ink:#1e2927; --muted:#75817b; --cream:#f4efe6; --paper:#fbf9f4; --line:#ddd8cc; --red:#ce5b3d; --blue:#54758b; --orange:#c1824c; --green:#6e8065; }
 * { box-sizing:border-box; }
 body { margin:0; background:#dfe4da; color:var(--ink); font-family:'DM Mono', ui-monospace, monospace; font-size:13px; line-height:1.6; }
@@ -331,6 +331,110 @@ button, a { -webkit-tap-highlight-color:transparent; }
   footer { padding-bottom:6px; }
 }
 
+/* Airbnb-inspired mobile pass: a calm, card-first interface for quick field use. */
+:root {
+  --airbnb-coral: #ff385c;
+  --airbnb-ink: #222222;
+  --airbnb-muted: #717171;
+  --airbnb-border: #dddddd;
+  --airbnb-surface: #ffffff;
+}
+
+body { font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--airbnb-ink); }
+.masthead h1, .hero-card h2, .day-header h2, .stop-card h3, .route-lane-head h3,
+.personal-expenses h3, .utility-row strong { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; letter-spacing: -.06em; }
+.section-label, .eyebrow, .stop-kind { font-family: 'DM Mono', monospace; }
+
+.main-nav { border-bottom: 0; }
+.nav-link { font-family: 'Noto Sans TC', sans-serif; }
+.nav-link.active { color: var(--airbnb-coral); }
+.nav-link.active:after { background: var(--airbnb-coral); }
+
+.stop-more { margin-top: 10px; border-top: 1px solid #eeeeee; }
+.stop-more summary { list-style: none; cursor: pointer; padding-top: 9px; color: var(--airbnb-muted); font-size: 10px; }
+.stop-more summary::-webkit-details-marker { display: none; }
+.stop-more summary span { float: right; color: var(--airbnb-coral); font-size: 15px; line-height: 10px; transition: transform .2s ease; }
+.stop-more[open] summary span { transform: rotate(180deg); }
+.stop-more-body { padding-top: 4px; }
+
+@media (max-width:720px) {
+  body { background: #f7f7f7; color: var(--airbnb-ink); }
+  .paper-texture { display: none; }
+  .app-shell { background: #fff; padding: 0 16px 28px; }
+  .main-nav { position: sticky; top: 0; z-index: 30; height: 58px; margin: 0 -16px; padding: 9px 16px 8px; display: block; background: rgba(255,255,255,.96); border-bottom: 1px solid #eeeeee; backdrop-filter: blur(16px); }
+  .main-nav:before { content: 'Kansai 旅程'; position: absolute; left: 16px; top: 10px; color: var(--airbnb-ink); font-size: 13px; font-weight: 700; }
+  .menu-button { display: none; }
+  .nav-links { display: flex; position: absolute; inset: auto 16px 7px auto; width: calc(100% - 126px); height: 36px; gap: 4px; overflow-x: auto; justify-content: flex-end; }
+  .nav-link { flex: 0 0 auto; min-height: 34px; padding: 7px 10px; border: 1px solid transparent; border-radius: 999px; color: #717171; font-size: 11px; white-space: nowrap; }
+  .nav-link:after { display: none; }
+  .nav-link.active { color: var(--airbnb-ink); background: #f2f2f2; }
+  .masthead { padding: 17px 0 15px; border-bottom: 0; }
+  .eyebrow { font-size: 8px; color: #717171; }
+  .masthead-row { margin-top: 12px; }
+  .kicker { color: var(--airbnb-coral); font-size: 11px; }
+  .masthead h1 { font-size: 34px; letter-spacing: -.1em; }
+  .subtitle { margin-top: 5px; color: #717171; font-size: 10px; }
+  .stamp { width: 46px; height: 46px; border-color: var(--airbnb-coral); color: var(--airbnb-coral); }
+  .stamp strong { font-size: 16px; }
+  .date-ribbon { margin-top: 13px; color: #717171; font-size: 9px; }
+  .date-ribbon .ribbon-line { background: var(--airbnb-coral); width: 12px; }
+  .hero-card { margin: 3px 0 12px; border: 0; border-radius: 16px; padding: 17px 16px 15px; background: #f7f7f7; box-shadow: none; }
+  .hero-card h2 { font-size: 21px; margin: 6px 0 5px; }
+  .hero-card p { color: #484848; font-size: 11px; line-height: 1.65; }
+  .weather-note { margin-top: 12px; padding-top: 10px; }
+  .weather-icon { font-size: 20px; color: var(--airbnb-coral); }
+  .quick-panel { margin: 0 0 18px; border: 0; border-radius: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; }
+  .quick-item { min-height: 61px; padding: 10px 11px; background: #fff; border-color: #eeeeee; }
+  .quick-item span { font-size: 9px; color: #717171; }
+  .quick-item strong { font-size: 15px; }
+  .progress-item { padding-bottom: 11px; }
+  .day-tabs { top: 58px; margin-inline: -16px; padding: 7px 16px 8px; background: rgba(255,255,255,.96); border-bottom: 1px solid #eeeeee; }
+  .day-tab { flex-basis: 54px; min-height: 48px; padding: 6px 8px; border: 1px solid #eeeeee; border-radius: 10px; background: #fff; }
+  .day-tab:after { display: none; }
+  .day-tab span, .day-tab small { font-size: 7px; }
+  .day-tab strong { font-size: 18px; }
+  .day-tab.active { border-color: var(--airbnb-ink); background: var(--airbnb-ink); color: #fff; }
+  .day-tab.active strong { color: #fff; }
+  .day-header { margin: 19px 0 13px; gap: 7px; }
+  .day-header h2 { font-size: 21px; }
+  .day-header p { color: #717171; font-size: 10px; line-height: 1.55; }
+  .today-button { width: auto; min-height: 34px; padding: 6px 12px; border: 1px solid #dddddd; border-radius: 999px; color: var(--airbnb-ink); font-size: 10px; }
+  .route-lane, .day5-lunch-column { border: 0; border-radius: 16px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.09); overflow: hidden; }
+  .route-lane-head { padding: 13px 14px 10px; border-bottom: 1px solid #eeeeee; }
+  .route-lane-head h3 { font-size: 16px; }
+  .route-lane-count { color: #717171; font-size: 10px; }
+  .route-timeline { padding: 11px 7px 3px 0; }
+  .route-lane .stop { grid-template-columns: 43px 21px minmax(0,1fr); }
+  .stop-time { padding-top: 14px; padding-right: 7px; }
+  .stop-time strong { font-size: 12px; }
+  .stop-time span { font-size: 8px; color: #b0b0b0; }
+  .stop-icon { width: 21px; height: 21px; left: -11px; top: 12px; border-color: #dddddd; color: var(--airbnb-coral); background: #fff; font-size: 10px; }
+  .route-lane .stop-card { margin-left: 6px; padding: 11px 11px 10px; border: 1px solid #eeeeee; border-radius: 13px; box-shadow: none; }
+  .stop-kind { color: #717171; font-size: 8px; }
+  .route-lane .stop-card h3 { margin: 3px 0 6px; color: var(--airbnb-ink); font-size: 15px; }
+  .place-link { padding: 5px 7px; border: 0; background: #f7f7f7; border-radius: 7px; color: #484848; font-size: 9px; }
+  .place-link-label { color: var(--airbnb-coral); }
+  .place-link-address { color: #717171; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .stop-meta { margin-top: 8px; color: #717171; font-size: 9px; }
+  .stop-cost { top: 11px; right: 11px; color: #717171; font-size: 8px; }
+  .stop-cost b { color: var(--airbnb-ink); font-size: 10px; }
+  .stop-more { margin-top: 8px; }
+  .stop-more summary { font-size: 9px; }
+  .stop-more-body { font-size: 10px; }
+  .stop-note { font-size: 10px; line-height: 1.7; }
+  .stop-links a { font-size: 8px; }
+  .stop-flight-info { font-size: 9px; }
+  .stop-flight-info strong { font-size: 12px; }
+  .parallel-note { margin: 10px 0; border-radius: 11px; background: #fff4f5; border-left-color: var(--airbnb-coral); font-size: 10px; }
+  .route-notes-card { border: 0; border-radius: 13px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .budget-section, .utility-section { margin-top: 25px; padding-top: 17px; border-top: 1px solid #eeeeee; }
+  .budget-card { border: 1px solid #eeeeee; border-radius: 12px; box-shadow: none; }
+  .personal-expenses { border: 1px solid #eeeeee; border-top: 0; border-radius: 15px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .personal-expenses h3 { font-size: 18px; }
+  .emergency-card, .checklist-row { border-radius: 12px; border-color: #eeeeee; background: #fff; }
+  footer { border-color: #eeeeee; }
+}
+
 /* Keep the mobile view intentionally quiet: core trip information first. */
 @media (max-width:720px) {
   .cover-story, .story-index, .route-map, .guide-desk { display:none !important; }
@@ -444,4 +548,18 @@ button, a { -webkit-tap-highlight-color:transparent; }
   .expense-table td:before { font-size:8px; }
   .expense-table td:nth-child(11) { grid-column:1 / -1; margin-top:2px; padding-top:4px; font-size:11px; }
   .expense-table th:first-child, .expense-table td:first-child { width:auto; }
+}
+
+/* Final mobile navigation override: keep the original tabs visible for one-tap switching. */
+@media (max-width:720px) {
+  .main-nav { position: sticky; top: 0; height: 58px; margin: 0 -16px; padding: 9px 16px 8px; display: block; background: rgba(255,255,255,.96); border-bottom: 1px solid #eeeeee; box-shadow: none; }
+  .main-nav:before { content: 'Kansai 旅程'; position: absolute; left: 16px; top: 10px; color: #222; font-size: 13px; font-weight: 700; }
+  .menu-button { display: none; }
+  .nav-links { display: flex; position: absolute; left: auto; right: 16px; top: 15px; width: calc(100% - 126px); height: 36px; padding: 0; flex-direction: row; align-items: center; gap: 4px; overflow-x: auto; border: 0; background: transparent; box-shadow: none; }
+  .nav-links.open { display: flex; }
+  .nav-link { flex: 0 0 auto; min-height: 34px; padding: 7px 10px; border: 1px solid transparent; border-radius: 999px; border-bottom: 0; color: #717171; text-align: center; font: 500 11px/1.2 'Noto Sans TC', sans-serif; white-space: nowrap; }
+  .nav-link:after { display: none; }
+  .nav-link.active { background: #f2f2f2; color: #222; }
+  .nav-link.active:after { display: none; }
+  .day-tabs { top: 58px; }
 }

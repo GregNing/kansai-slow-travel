@@ -1,5 +1,5 @@
-const CACHE = 'kansai-slow-travel-v62';
-const ASSETS = ['./', './index.html', './styles.css?v=62', './data.js?v=62', './app.js?v=62', './manifest.webmanifest'];
+const CACHE = 'kansai-slow-travel-v63';
+const ASSETS = ['./', './index.html', './styles.css?v=63', './data.js?v=63', './app.js?v=63', './manifest.webmanifest'];
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', (event) => {
