@@ -189,22 +189,25 @@ function renderBudget() {
   $('budget-grid').innerHTML = TRIP_DATA.budget.map((item) => `<div class="budget-card ${item.tone}"><div class="budget-icon">${item.icon}</div><div><span>${item.label}</span><strong>${money(item.amount)}</strong></div></div>`).join('');
   const expenses = TRIP_DATA.personalExpenses;
   const sharedTotal = expenses.sharedTickets.reduce((sum, ticket) => sum + ticket.perPerson, 0);
+  const esim = expenses.esim;
   const splitLodging = expenses.splitLodging;
   const splitLodgingLabel = splitLodging.label.replace('（', '<br>（');
   const currentPayerLabel = `${expenses.currentPayer}<br>先出小計`;
   const usjTicket = expenses.usjTicket;
   const sharedRows = expenses.sharedTickets.map((ticket) => `<div class="shared-ticket-row"><span>${ticket.label}</span><b>NT$ ${ticket.total.toLocaleString('zh-TW')}</b><em>均攤 NT$ ${ticket.perPerson.toLocaleString('zh-TW')}／人</em></div>`).join('');
+  const esimRow = `<div class="shared-ticket-row"><span>${esim.label}</span><b>NT$ ${esim.total.toLocaleString('zh-TW')}</b><em>均攤 NT$ ${esim.perPerson.toLocaleString('zh-TW')}／人</em></div>`;
   const kimonoRows = `<div class="shared-ticket-row"><span>和服｜女性方案（3 位）</span><b>NT$ 2,932</b><em>均攤 NT$ 988／人</em></div><div class="shared-ticket-row"><span>和服｜男性／兒童方案（4 位）</span><b>NT$ 7,828</b><em>均攤 NT$ 1,957／人</em></div>`;
   const travelerRows = expenses.travelers.map((traveler) => {
     const personalSubtotal = (traveler.flight || 0) + (traveler.kimono || 0) + (traveler.other || 0);
     const splitLodgingAmount = splitLodging.excluded.includes(traveler.name) ? 0 : splitLodging.perPerson;
     const luluSubtotal = personalSubtotal + expenses.lodgingPerPerson;
     const usjAmount = usjTicket.excluded.includes(traveler.name) ? 0 : usjTicket.perPerson;
-    const ningSubtotal = usjAmount + splitLodgingAmount + sharedTotal;
+    const esimAmount = esim.participants.includes(traveler.name) ? esim.perPerson : 0;
+    const ningSubtotal = usjAmount + splitLodgingAmount + sharedTotal + esimAmount;
     const total = luluSubtotal + ningSubtotal;
-    return `<tr><th scope="row">${traveler.name}</th><td>NT$ ${(traveler.flight || 0).toLocaleString('zh-TW')}</td><td>NT$ ${(traveler.kimono || 0).toLocaleString('zh-TW')}</td><td>NT$ ${expenses.lodgingPerPerson.toLocaleString('zh-TW')}</td><td>NT$ ${luluSubtotal.toLocaleString('zh-TW')}</td><td>${usjAmount ? `NT$ ${usjAmount.toLocaleString('zh-TW')}` : '—'}</td><td>${splitLodgingAmount ? `NT$ ${splitLodgingAmount.toLocaleString('zh-TW')}` : '—'}</td><td>NT$ ${sharedTotal.toLocaleString('zh-TW')}</td><td class="payer-subtotal">NT$ ${ningSubtotal.toLocaleString('zh-TW')}</td><td><strong>NT$ ${total.toLocaleString('zh-TW')}</strong></td></tr>`;
+    return `<tr><th scope="row">${traveler.name}</th><td>NT$ ${(traveler.flight || 0).toLocaleString('zh-TW')}</td><td>NT$ ${(traveler.kimono || 0).toLocaleString('zh-TW')}</td><td>NT$ ${expenses.lodgingPerPerson.toLocaleString('zh-TW')}</td><td>NT$ ${luluSubtotal.toLocaleString('zh-TW')}</td><td>${esimAmount ? `NT$ ${esimAmount.toLocaleString('zh-TW')}` : '—'}</td><td>${usjAmount ? `NT$ ${usjAmount.toLocaleString('zh-TW')}` : '—'}</td><td>${splitLodgingAmount ? `NT$ ${splitLodgingAmount.toLocaleString('zh-TW')}` : '—'}</td><td>NT$ ${sharedTotal.toLocaleString('zh-TW')}</td><td class="payer-subtotal">NT$ ${ningSubtotal.toLocaleString('zh-TW')}</td><td><strong>NT$ ${total.toLocaleString('zh-TW')}</strong></td></tr>`;
   }).join('');
-  $('personal-expenses').innerHTML = `<section class="personal-expenses"><div class="section-label">PERSONAL SPLIT / 個人分攤</div><h3>每個人目前應分攤</h3><p class="expense-note">機票、和服與原住宿列在 ${expenses.currentPayer} 先出；${splitLodging.label}、船票、火車票與 USJ 門票列在 ${usjTicket.payer} 先出。USJ 門票總額 NT$${usjTicket.total.toLocaleString('zh-TW')}，由 5 人均分 NT$${usjTicket.perPerson.toLocaleString('zh-TW')}（不含嬅、學）。${splitLodging.label}總額 NT$${splitLodging.total.toLocaleString('zh-TW')}，每人 NT$${splitLodging.perPerson.toLocaleString('zh-TW')}（不含 L、中）。</p><div class="shared-ticket-split">${sharedRows}${kimonoRows}</div><div class="expense-table-wrap"><table class="expense-table"><thead><tr><th>旅客</th><th>機票</th><th>和服</th><th>住宿<br>10/12–10/18</th><th>${currentPayerLabel}</th><th>USJ門票</th><th>${splitLodgingLabel}</th><th>船票＋火車票</th><th>${usjTicket.payer}先出小計</th><th>總花費</th></tr></thead><tbody>${travelerRows}</tbody></table></div></section>`;
+  $('personal-expenses').innerHTML = `<section class="personal-expenses"><div class="section-label">PERSONAL SPLIT / 個人分攤</div><h3>每個人目前應分攤</h3><p class="expense-note">機票、和服與原住宿列在 ${expenses.currentPayer} 先出；${splitLodging.label}、船票、火車票、USJ 門票與 eSIM 分別列在先付款者名下。USJ 門票總額 NT$${usjTicket.total.toLocaleString('zh-TW')}，由 5 人均分 NT$${usjTicket.perPerson.toLocaleString('zh-TW')}（不含嬅、學）。${splitLodging.label}總額 NT$${splitLodging.total.toLocaleString('zh-TW')}，每人 NT$${splitLodging.perPerson.toLocaleString('zh-TW')}（不含 L、中）。${esim.label}總額 NT$${esim.total.toLocaleString('zh-TW')}，每人 NT$${esim.perPerson.toLocaleString('zh-TW')}。</p><div class="shared-ticket-split">${sharedRows}${kimonoRows}${esimRow}</div><div class="expense-table-wrap"><table class="expense-table"><thead><tr><th>旅客</th><th>機票</th><th>和服</th><th>住宿<br>10/12–10/18</th><th>${currentPayerLabel}</th><th>eSIM</th><th>USJ門票</th><th>${splitLodgingLabel}</th><th>船票＋火車票</th><th>${usjTicket.payer}先出小計</th><th>總花費</th></tr></thead><tbody>${travelerRows}</tbody></table></div></section>`;
 }
 
 function renderUtilitySections() {

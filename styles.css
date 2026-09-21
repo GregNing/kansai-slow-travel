@@ -31,7 +31,7 @@ body { margin:0; background:#dfe4da; color:var(--ink); font-family:'DM Mono', ui
 .stop-cost { position:static; margin-top:10px; padding-top:8px; border-top:1px solid #ece8df; }
 .stop-time { min-width:0; }.stop-time strong { white-space:nowrap; font-size:14px; }
 @media (max-width:520px) { .stop { grid-template-columns:60px 25px minmax(0,1fr); } }
-.personal-expenses { margin-top:28px; border-top:1px solid var(--line); padding-top:20px; }.personal-expenses h3 { margin:6px 0 3px; font:600 22px 'Noto Serif TC',serif; }.expense-note { margin:0 0 13px; color:var(--muted); font-size:10px; }.shared-ticket-split { display:flex; flex-direction:column; gap:1px; margin:13px 0 15px; background:#d7e0df; border:1px solid #d7e0df; }.shared-ticket-row { display:grid; grid-template-columns:max-content auto 1fr; align-items:baseline; gap:18px; padding:9px 11px; background:#f3f5f0; font-size:10px; }.shared-ticket-row b,.shared-ticket-row em { color:var(--red); font-weight:600; font-style:normal; white-space:nowrap; }.shared-ticket-row em { justify-self:end; }.expense-table-wrap { overflow-x:auto; border:1px solid #d7e0df; }.expense-table { width:100%; min-width:620px; border-collapse:collapse; background:#fbfcfa; font-size:10px; }.expense-table th,.expense-table td { padding:10px 11px; border-top:1px solid #e1e7e2; text-align:right; white-space:nowrap; }.expense-table thead th { color:var(--muted); font-size:9px; font-weight:500; background:#f3f5f0; }.expense-table th:first-child,.expense-table td:first-child { text-align:left; }.expense-table tbody th { font-weight:600; }.expense-table td small { display:none; }.expense-table strong { color:var(--red); }
+.personal-expenses { margin-top:28px; border-top:1px solid var(--line); padding-top:20px; }.personal-expenses h3 { margin:6px 0 3px; font:600 22px 'Noto Serif TC',serif; }.expense-note { margin:0 0 13px; color:var(--muted); font-size:10px; }.shared-ticket-split { display:flex; flex-direction:column; gap:1px; margin:13px 0 15px; background:#d7e0df; border:1px solid #d7e0df; }.shared-ticket-row { display:grid; grid-template-columns:max-content auto 1fr; align-items:baseline; gap:18px; padding:9px 11px; background:#f3f5f0; font-size:10px; }.shared-ticket-row b,.shared-ticket-row em { color:var(--red); font-weight:600; font-style:normal; white-space:nowrap; }.shared-ticket-row em { justify-self:end; }.expense-table-wrap { overflow-x:auto; border:1px solid #d7e0df; }.expense-table { width:100%; min-width:620px; table-layout:fixed; border-collapse:collapse; background:#fbfcfa; font-size:10px; }.expense-table th,.expense-table td { padding:10px 11px; border-top:1px solid #e1e7e2; text-align:right; white-space:nowrap; }.expense-table thead th { color:var(--muted); font-size:9px; font-weight:500; background:#f3f5f0; }.expense-table th:first-child,.expense-table td:first-child { width:46px; text-align:left; }.expense-table tbody th { font-weight:600; }.expense-table td small { display:none; }.expense-table strong { color:var(--red); }
 .stop-time { padding-right:22px; transform:translateX(-8px); }
 .stop-time span { font-size:14px; line-height:1.4; color:var(--ink); font-weight:700; }
 .tab-panel[hidden] { display:none !important; }
@@ -191,6 +191,193 @@ button, a { -webkit-tap-highlight-color:transparent; }
 @media (max-width:520px) { .parallel-note { display:block; }.parallel-note span { display:block; margin-top:3px; }.route-lane-head { padding-left:13px; padding-right:13px; } }
 @media (max-width:720px) { .timeline-board, .timeline-board.has-parallel-routes { grid-template-columns:1fr; }.day5-parallel-pair { grid-template-columns:1fr; }.route-notes-grid { grid-template-columns:1fr; } }
 @media (max-width:520px) { .route-notes-card > summary, .route-notes-body { padding-left:13px; padding-right:13px; }.route-notes-summary-copy strong { font-size:18px; }.route-notes-toggle { display:none; }.flight-card-head { display:block; padding:15px 13px 13px; }.flight-status { display:inline-block; margin-top:12px; }.flight-route { grid-template-columns:minmax(0,1fr) 35px minmax(0,1fr); gap:6px; padding:16px 13px; }.flight-airport strong { font-size:27px; }.flight-airport b { font-size:10px; }.flight-airport small { font-size:15px; }.flight-summary { grid-template-columns:1fr; margin:0 13px; }.flight-summary > div { padding:9px 10px; }.flight-table-wrap, .flight-totals { margin-left:13px; margin-right:13px; }.flight-note { padding-left:13px; padding-right:13px; }.flight-totals > div { grid-template-columns:1fr; gap:3px; }.flight-totals .flight-total { grid-template-columns:1fr auto; gap:8px; } }
+
+/* Mobile-first pocket guide: optimized for one-hand reading outdoors. */
+@media (max-width:720px) {
+  :root { --mobile-gutter: 14px; }
+  body { background:var(--paper); font-size:13px; padding-bottom:72px; }
+  .paper-texture { opacity:.16; }
+  .app-shell { width:100%; min-height:100dvh; padding:18px var(--mobile-gutter) 34px; box-shadow:none; overflow:visible; }
+  .main-nav { position:fixed; left:0; right:0; bottom:0; top:auto; z-index:20; height:62px; margin:0; padding:7px max(10px, env(safe-area-inset-left)) max(7px, env(safe-area-inset-bottom)); border:0; border-top:1px solid #d8d5ca; box-shadow:0 -10px 30px #1e292716; background:#fffdf8f5; backdrop-filter:blur(16px); }
+  .nav-links { width:100%; justify-content:space-around; gap:3px; }
+  .nav-link { flex:1; min-height:42px; padding:7px 2px 5px; border-radius:12px; font:600 12px/1 'Noto Serif TC',serif; }
+  .nav-link:after { left:23%; right:23%; bottom:3px; height:2px; }
+  .nav-link.active { background:#f1eee5; color:var(--red); }
+  .nav-link.active:after { background:var(--red); }
+  .menu-button { display:none; }
+  .masthead { padding-bottom:15px; }
+  .eyebrow { font-size:9px; }
+  .masthead-row { margin-top:18px; align-items:center; }
+  .masthead h1 { font-size:clamp(38px, 13vw, 52px); letter-spacing:-.11em; }
+  .subtitle { max-width:245px; margin-top:7px; font-size:11px; line-height:1.5; }
+  .stamp { width:52px; height:52px; }
+  .stamp strong { font-size:18px; }
+  .date-ribbon { flex-wrap:wrap; gap:7px 9px; margin-top:18px; font-size:10px; }
+  .date-ribbon .ribbon-line { width:18px; }
+  .hero-card { margin:18px 0 12px; padding:19px 17px 16px; border-radius:18px; }
+  .hero-card h2 { font-size:27px; margin-top:9px; }
+  .hero-card p { font-size:12px; line-height:1.75; }
+  .weather-note { align-items:flex-start; margin-top:17px; padding-top:12px; }
+  .weather-note span:last-child { font-size:10px; line-height:1.65; }
+  .quick-panel { grid-template-columns:1fr 1fr; gap:0; margin:12px 0 20px; border-radius:14px; overflow:hidden; }
+  .quick-item { min-height:70px; padding:12px 11px; }
+  .quick-item:nth-child(2) { border-right:0; }
+  .quick-item:nth-child(3) { grid-column:1 / -1; border-top:1px solid var(--line); }
+  .quick-item strong { font-size:16px; }
+  .progress-track { margin-top:7px; }
+  .cover-story { margin:14px 0 23px; border-radius:18px; overflow:hidden; }
+  .cover-image { min-height:180px; }
+  .cover-caption { min-height:172px; padding:18px 17px 17px; }
+  .cover-caption strong { max-width:260px; font-size:26px; line-height:1.35; }
+  .story-index, .route-map, .guide-desk { margin-top:27px; }
+  .story-index-heading, .guide-desk-head { padding-bottom:11px; }
+  .story-index h2, .guide-desk h2 { font-size:23px; }
+  .route-cards { grid-template-columns:1fr 1fr; gap:8px; }
+  .route-card { min-height:183px; border-radius:14px; padding:13px 12px; }
+  .route-card-copy strong { font-size:16px; }
+  .route-card-copy em { line-height:1.5; }
+  .route-card-map { font-size:8px; }
+  .route-map { border-radius:18px; padding:19px 16px 21px; margin-bottom:10px; }
+  .route-map-copy h2 { font-size:27px; }
+  .route-line { padding-top:2px; }
+  .route-stop strong { font-size:13px; }
+  .route-stop small { font-size:6px; }
+  .guide-grid { gap:8px; }
+  .guide-card { min-height:145px; border-radius:14px; padding:14px; }
+  .guide-card strong { margin-top:12px; font-size:18px; }
+  .guide-card p { font-size:10px; line-height:1.6; }
+  .anchor-section { scroll-margin-top:8px; }
+  .day-tabs { position:sticky; top:0; z-index:10; margin-inline:calc(var(--mobile-gutter) * -1); padding:8px var(--mobile-gutter) 9px; background:#fbf9f4f2; backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  .day-tab { flex-basis:48px; min-height:58px; padding:6px 2px; }
+  .day-tab strong { font-size:20px; }
+  .day-header { margin:20px 0 15px; gap:10px; }
+  .day-header h2 { font-size:24px; line-height:1.25; }
+  .day-header h2 span { font-size:9px; margin-left:5px; }
+  .day-header p { font-size:10px; line-height:1.65; }
+  .today-button { width:100%; min-height:40px; border-radius:10px; font-size:11px; }
+  .parallel-note { margin-bottom:12px; border-radius:0 10px 10px 0; }
+  .route-lane, .day5-lunch-column { border-radius:15px; overflow:hidden; }
+  .route-lane-head { padding:13px 12px 11px; }
+  .route-lane-head h3 { font-size:18px; }
+  .route-timeline { padding:12px 8px 3px 0; }
+  .route-lane .stop { grid-template-columns:45px 23px minmax(0,1fr); }
+  .route-lane .stop-card { margin-left:7px; padding:12px 11px; border-radius:12px; }
+  .route-lane .stop-card h3 { font-size:16px; line-height:1.4; margin-bottom:7px; }
+  .stop-time { padding-top:16px; padding-right:7px; }
+  .stop-time strong { font-size:13px; }
+  .stop-time span { font-size:8px; }
+  .stop-icon { width:23px; height:23px; left:-12px; top:13px; font-size:11px; }
+  .stop-meta { flex-wrap:wrap; gap:4px 9px; margin-top:10px; font-size:9px; }
+  .place-link { width:100%; padding:6px 7px; font-size:9px; }
+  .stop-note { font-size:10px; line-height:1.7; }
+  .stop-links a { font-size:8px; }
+  .stop-cost { font-size:9px; }
+  .route-notes { gap:9px; margin-top:12px; }
+  .route-notes-card { border-radius:13px; overflow:hidden; }
+  .route-notes-card > summary { padding:13px; }
+  .route-notes-body { padding:13px; }
+  .route-notes-intro, .route-note-block p, .route-notes-tips ul { font-size:10px; line-height:1.75; }
+  .flight-card { border-radius:16px; }
+  .flight-card-head h3 { font-size:20px; }
+  .flight-route { border-top:0; }
+  .flight-airport strong { font-size:25px; }
+  .flight-airport b { font-size:9px; line-height:1.4; }
+  .flight-table-wrap { overflow:visible; }
+  .flight-table { min-width:0; display:block; }
+  .flight-table caption { font-size:14px; }
+  .flight-table thead { display:none; }
+  .flight-table tbody, .flight-table tr { display:block; }
+  .flight-table tr { padding:8px 10px; border-top:1px solid #e1e7e2; }
+  .flight-table tbody th, .flight-table tbody td { display:block; padding:1px 0; border:0; font-size:10px; }
+  .flight-table tbody th { font-size:12px; }
+  .flight-table tbody td:last-child { text-align:left; white-space:normal; }
+  .flight-table tbody td:nth-child(2):before { content:'行李／票種　'; color:var(--muted); }
+  .flight-table tbody td:nth-child(3):before { content:'費用　'; color:var(--muted); }
+  .budget-section, .utility-section { margin-top:25px; padding-top:18px; }
+  .budget-grid { grid-template-columns:1fr 1fr; gap:7px; }
+  .budget-card { min-height:68px; border-radius:12px; padding:10px; }
+  .budget-card:last-child { grid-column:1 / -1; }
+  .budget-card strong { font-size:12px; }
+  .personal-expenses { padding:16px 11px; border-radius:16px; }
+  .personal-expenses h3 { font-size:20px; }
+  .expense-note { font-size:10px; line-height:1.75; }
+  .shared-ticket-row { padding:10px; }
+  .expense-table-wrap { overflow:visible; margin-inline:0; box-shadow:none; }
+  .expense-table { width:100% !important; min-width:0 !important; display:block; table-layout:auto; font-size:10px; }
+  .expense-table thead { display:none; }
+  .expense-table tbody, .expense-table tr { display:block; }
+  .expense-table tr { display:grid; grid-template-columns:1fr 1fr; gap:0 10px; padding:11px 10px; border-top:1px solid var(--line); }
+  .expense-table tbody th { grid-column:1 / -1; padding:0 0 7px; font:600 16px 'Noto Serif TC',serif; }
+  .expense-table td { display:flex; justify-content:space-between; gap:6px; padding:4px 0; border:0; font-size:10px; text-align:right; }
+  .expense-table td:before { color:var(--muted); font-size:9px; text-align:left; }
+  .expense-table td:nth-child(2):before { content:'機票'; }
+  .expense-table td:nth-child(3):before { content:'和服'; }
+  .expense-table td:nth-child(4):before { content:'住宿'; }
+  .expense-table td:nth-child(5):before { content:'Lulu先出'; }
+  .expense-table td:nth-child(6):before { content:'eSIM'; }
+  .expense-table td:nth-child(7):before { content:'USJ'; }
+  .expense-table td:nth-child(8):before { content:'10/11住宿'; }
+  .expense-table td:nth-child(9):before { content:'船票火車'; }
+  .expense-table td:nth-child(10):before { content:'甯先出'; }
+  .expense-table td:nth-child(11) { grid-column:1 / -1; margin-top:4px; padding-top:7px; border-top:1px solid #d7e0df; font-weight:700; font-size:12px; }
+  .expense-table td:nth-child(11):before { content:'總花費'; font-size:10px; }
+  .utility-row { gap:10px; padding:12px 0; }
+  .utility-row strong { font-size:14px; }
+  .utility-row p { font-size:10px; line-height:1.7; }
+  .checklist { grid-template-columns:1fr; gap:7px; }
+  .checklist-row { min-height:46px; border-radius:11px; padding:10px; }
+  .emergency-grid { grid-template-columns:1fr 1fr; gap:7px; }
+  .emergency-card { min-height:82px; border-radius:12px; padding:11px; }
+  footer { padding-bottom:6px; }
+}
+
+/* Keep the mobile view intentionally quiet: core trip information first. */
+@media (max-width:720px) {
+  .cover-story, .story-index, .route-map, .guide-desk { display:none !important; }
+  .hero-card { background:#fff; color:var(--ink); border:1px solid var(--line); box-shadow:0 4px 14px #1e29270b; }
+  .hero-card:after { display:none; }
+  .hero-card .section-label { color:var(--muted); }
+  .hero-card h2 { color:var(--ink); font-size:24px; }
+  .hero-card p { color:#62716a; }
+  .weather-note { color:var(--ink); border-top-color:var(--line); }
+  .weather-note span:last-child { color:var(--muted); }
+  .quick-panel { background:#fff; box-shadow:0 3px 12px #1e29270a; }
+  .route-lane, .day5-lunch-column, .flight-card, .personal-expenses { box-shadow:0 3px 12px #1e29270a; }
+  .stop-card { background:#fff; }
+  .stop-card:hover { transform:none; }
+  .day-header { margin-top:16px; }
+  .budget-card { background:#fff; border:1px solid var(--line); }
+  .budget-section { margin-top:18px; padding-top:12px; }
+  .budget-grid { margin-top:8px; gap:5px; }
+  .budget-card { min-height:54px; padding:7px 9px; gap:7px; }
+  .budget-icon { font-size:18px; }
+  .personal-expenses { margin-top:14px; padding:10px 8px; border-radius:12px; }
+  .personal-expenses h3 { margin:4px 0 2px; font-size:18px; }
+  .expense-note { margin-bottom:8px; font-size:9px; line-height:1.55; }
+  .shared-ticket-split { margin:8px 0 9px; }
+  .shared-ticket-row { min-height:0; padding:7px 8px; gap:1px; font-size:9px; }
+  .shared-ticket-row b, .shared-ticket-row em { font-size:9px; }
+  .expense-table tr { gap:0 7px; padding:7px 8px; }
+  .expense-table tbody th { padding-bottom:4px; font-size:14px; }
+  .expense-table td { padding:2px 0; font-size:9px; }
+  .expense-table td:before { font-size:8px; }
+  .expense-table td:nth-child(10) { margin-top:2px; padding-top:4px; font-size:11px; }
+}
+
+/* Compact mobile navigation: hamburger menu, matching the original pocket layout. */
+@media (max-width:720px) {
+  body { padding-bottom:0; }
+  .main-nav { position:sticky; left:auto; right:auto; bottom:auto; top:0; height:42px; margin:0 calc(var(--mobile-gutter) * -1) 8px; padding:0 var(--mobile-gutter); border-top:0; border-bottom:0; box-shadow:none; background:#fbf9f4f2; backdrop-filter:blur(12px); }
+  .menu-button { display:grid; width:34px; height:34px; padding:7px 4px; gap:4px; border:1px solid var(--red); border-radius:5px; background:var(--paper); }
+  .menu-button i { width:24px; height:1px; background:var(--red); }
+  .nav-links { display:none; position:absolute; left:var(--mobile-gutter); right:var(--mobile-gutter); top:41px; width:auto; padding:9px 14px 8px; flex-direction:column; align-items:stretch; justify-content:initial; gap:0; border:1px solid var(--line); background:#fbf9f4; box-shadow:0 16px 28px #1e29271f; }
+  .nav-links.open { display:flex; }
+  .nav-link { flex:none; min-height:42px; padding:9px 0; border-radius:0; border-bottom:1px solid #e8e4da; text-align:left; font-size:14px; }
+  .nav-link:last-child { border-bottom:0; }
+  .nav-link:after { left:0; right:0; bottom:-1px; height:2px; }
+  .nav-link.active { background:transparent; color:var(--ink); }
+  .nav-link.active:after { background:var(--ink); }
+}
 .stop-flight-info { display:grid; gap:3px; margin-top:11px; padding:10px 11px 9px; border-left:3px solid var(--red); background:#f4f1e9; color:#536159; font-size:10px; line-height:1.5; }
 .stop-flight-info strong { color:var(--ink); font:600 14px/1.35 'Noto Serif TC',serif; letter-spacing:-.04em; }
 .stop-flight-label { color:var(--red); font-size:8px; letter-spacing:.1em; }
@@ -213,7 +400,7 @@ button, a { -webkit-tap-highlight-color:transparent; }
 .expense-table { width: 100%; min-width: 0; table-layout: fixed; font-size: 9px; }
 .expense-table th, .expense-table td { padding: 6px 5px; white-space: normal; }
 .expense-table td { white-space: nowrap; }
-.expense-table th:first-child, .expense-table td:first-child { padding-left: 9px; padding-right: 7px; }
+.expense-table th:first-child, .expense-table td:first-child { width: 46px; padding-left: 9px; padding-right: 7px; }
 .expense-table th:last-child, .expense-table td:last-child { padding-left: 7px; padding-right: 9px; }
 .expense-table thead th { position: sticky; top: 0; z-index: 1; letter-spacing: .04em; }
 .expense-table tbody tr:nth-child(even) { background: rgba(243, 245, 240, .42); }
@@ -231,5 +418,30 @@ button, a { -webkit-tap-highlight-color:transparent; }
   .expense-table thead th { position: static; }
   .expense-table { width: 980px !important; min-width: 980px !important; table-layout: auto; font-size: 10px; }
   .expense-table th, .expense-table td { padding: 8px 9px; white-space: nowrap; }
+  .expense-table th:first-child, .expense-table td:first-child { width: 46px; }
   .expense-table th { white-space: normal; }
+}
+
+/* Final mobile expense pass: compact cards, no horizontal scrolling. */
+@media (max-width:720px) {
+  .budget-section { margin-top:18px; padding-top:12px; }
+  .budget-grid { margin-top:8px; gap:5px; }
+  .budget-card { min-height:54px; padding:7px 9px; gap:7px; }
+  .budget-icon { font-size:18px; }
+  .personal-expenses { margin-top:14px; padding:10px 8px; border-radius:12px; }
+  .personal-expenses h3 { margin:4px 0 2px; font-size:18px; }
+  .expense-note { margin:0 0 8px; font-size:9px; line-height:1.55; }
+  .shared-ticket-split { margin:8px 0 9px; }
+  .shared-ticket-row { min-height:0; padding:7px 8px; gap:1px; font-size:9px; }
+  .shared-ticket-row b, .shared-ticket-row em { font-size:9px; }
+  .expense-table-wrap { width:100%; margin-inline:0; overflow:visible; box-shadow:none; }
+  .expense-table { width:100% !important; min-width:0 !important; display:block; table-layout:auto; font-size:10px; }
+  .expense-table thead { display:none; }
+  .expense-table tbody, .expense-table tr { display:block; }
+  .expense-table tr { display:grid; grid-template-columns:1fr 1fr; gap:0 7px; padding:7px 8px; }
+  .expense-table tbody th { display:block; grid-column:1 / -1; padding:0 0 4px; font:600 14px 'Noto Serif TC',serif; }
+  .expense-table td { display:flex; justify-content:space-between; gap:6px; padding:2px 0; border:0; white-space:nowrap; font-size:9px; }
+  .expense-table td:before { font-size:8px; }
+  .expense-table td:nth-child(11) { grid-column:1 / -1; margin-top:2px; padding-top:4px; font-size:11px; }
+  .expense-table th:first-child, .expense-table td:first-child { width:auto; }
 }
