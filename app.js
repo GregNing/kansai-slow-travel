@@ -5,6 +5,7 @@ const flightMoney = (currency, value) => `${currency} ${value.toLocaleString('en
 const flightAnchor = (flight) => `flight-${String(flight.reference || flight.flightNumber).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 const googleMapsUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 const isGoogleMapsUrl = (url) => /google\.com\/maps|maps\.app\.goo\.gl/.test(url || '');
+const mapLinkAttrs = () => (window.matchMedia && window.matchMedia('(max-width: 720px)').matches ? '' : 'target="_blank" rel="noopener"');
 const mapsUrlFor = (stop) => {
   const savedMap = stop.mapUrl || (stop.links || []).find((link) => isGoogleMapsUrl(link.url))?.url;
   const query = stop.mapQuery || [stop.title, stop.place].filter(Boolean).join(' ');
@@ -63,7 +64,7 @@ function renderRouteCards() {
         <span class="route-card-copy"><small>${day.short} / ${day.weekday} · ${lead.place.split('／')[0]}</small><strong>${day.label}</strong><em>${day.summary}</em></span>
         <span class="route-card-arrow">↗</span>
       </button>
-      <a class="route-card-map" href="${mapsUrlFor(lead)}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${lead.title}">⌖ Google Maps 位置 ↗</a>
+      <a class="route-card-map" href="${mapsUrlFor(lead)}" ${mapLinkAttrs()} aria-label="在 Google Maps 開啟 ${lead.title}">⌖ Google Maps 位置 ↗</a>
     </article>`;
   }).join('');
   document.querySelectorAll('[data-route-day]').forEach((button) => button.addEventListener('click', () => {
@@ -180,7 +181,7 @@ function renderStop(day, stop, originalIndex, route) {
       const passengerSummary = `${flight.passengers.length} 位成人 · ${baggageCount ? `30 公斤託運 × ${baggageCount}` : '行李額度待確認'}`;
       return `<div class="stop-flight-info"><span class="stop-flight-label">✈ FLIGHT DETAIL / 班機詳細</span><strong>${flight.airline} ${flight.flightNumber}</strong><span>${flight.date} · ${flight.departure.code} ${flight.departure.time} → ${flight.arrival.code} ${flight.arrival.time}</span><span>${passengerSummary} · ${flight.totalLabel || '訂單金額'} ${flightMoney(flight.currency, flight.total)}</span><a href="#${flightAnchor(flight)}">查看完整票務表 ↘</a></div>`;
     }).join('');
-    const mapLink = `<a class="place-link" href="${maps}" target="_blank" rel="noopener" aria-label="在 Google Maps 開啟 ${stop.title}"><span class="place-link-label">⌖ Google Maps 位置 ↗</span><span class="place-link-address">${stop.place}</span></a>`;
+    const mapLink = `<a class="place-link" href="${maps}" ${mapLinkAttrs()} aria-label="在 Google Maps 開啟 ${stop.title}"><span class="place-link-label">⌖ Google Maps 位置 ↗</span><span class="place-link-address">${stop.place}</span></a>`;
     const paidCost = stop.paidCost ? `<span class="stop-paid">${stop.paidLabel || '已付款'} <b>${stop.paidCurrency === 'TWD' ? 'NT$' : stop.paidCurrency}${stop.paidCost.toLocaleString('zh-TW')}</b></span>` : '';
     const extraContent = `${flightInfo}${links ? `<div class="stop-links">${links}</div>` : ''}<p class="stop-note">${stop.note}</p>`;
     const more = extraContent.trim() ? `<details class="stop-more"><summary>查看備註與連結 <span>⌄</span></summary><div class="stop-more-body">${extraContent}</div></details>` : '';
