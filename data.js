@@ -350,3 +350,16 @@ TRIP_DATA.reminders.unshift({
     { label: '京都／大阪 JMA 天氣預報', url: 'https://www.jma.go.jp/bosai/forecast/' }
   ]
 });
+TRIP_DATA.reminders.unshift({
+  title: '官方網站全掃｜2026/10/08',
+  text: '已於 2026/10/08 再次掃描主要官方來源：JMA 京都 10/12 為晴時多雲、約 27°C／14°C、降雨機率 20%；10/13 為多雲時晴、約 26°C／15°C，10/14 為多雲、約 24°C／14°C。台灣虎航 IT210 夏季班表仍為 10/11 TPE 06:40→KIX 10:25；嵯峨野小火車 10/12 仍有 09:02 班次；KATE 京都線班表與 11:50 KIX 第一航廈目標班次仍可用。太秦電影村、東寺、清水寺、二條城、勝尾寺、USJ、三間住宿的日期與營業／入住時間未見衝突；USJ Halloween Horror Nights 仍為 9/11–11/8。關西樂享周遊券設施清單已於 10/7 更新，兌換前仍要以 Travel Contents App 當下清單為準。10/12 保津川水位／運航、USJ 整理券、航班當日狀態與餐廳臨時休業仍不能提前保證，須於前一晚及當日再查。',
+  links: [
+    { label: 'JMA 京都天氣資料', url: 'https://www.data.jma.go.jp/yoho/data/jishin/met/kishoushien_Kyoto_Kyoto-shi.html' },
+    { label: '台灣虎航官方班表', url: 'https://www.tigerairtw.com/ko-KR/print/flight-schedule-table?slug=flight-schedule' },
+    { label: '嵯峨野觀光鐵道官方時刻表', url: 'https://www.sagano-kanko.co.jp/en/train-info/' },
+    { label: 'KATE 京都線官方時刻表', url: 'https://www.kate.co.jp/en/timetable/detail/KY' },
+    { label: '保津川當日運航狀況', url: 'https://www.hozugawakudari.jp/emergency/43635' },
+    { label: 'USJ 官方活動', url: 'https://www.usj.co.jp/web/en/us/events/halloween-extreme-autumn-2026/halloween-horror-nights' },
+    { label: '關西樂享周遊券最新清單', url: 'https://travelcontentsapp.com/en/have-fun-pass/kansai/?_type=experience' }
+  ]
+});
