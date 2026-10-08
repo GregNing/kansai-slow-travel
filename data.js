@@ -325,6 +325,16 @@ const airAsiaTotal = returnFlights.filter((flight) => flight.airline.includes('A
 returnFlights.filter((flight) => flight.airline.includes('AirAsia')).forEach((flight) => {
   flight.note = `L、Y、甯、 中、紀搭乘關西機場第一航廈亞洲航空 D7379 20:55 班機；共 80 公斤托運、不限件數，各自手提 7 公斤。兩筆訂單合計 JPY ${airAsiaTotal.toLocaleString('ja-JP')}，刷卡折合 NT$26,810；中、紀各 NT$5,905，L、Y、甯各 NT$5,000。`;
 });
+TRIP_DATA.reminders.unshift({
+  title: '官方網站全掃｜2026/10/08 晚間更新',
+  text: '2026/10/08 17:00 JMA 最新版本：10/12 京都晴時多雲、約 27°C／15°C、降雨機率 20%；10/13 多雲、約 26°C／15°C、降雨機率 20%；10/14 多雲偶雨、約 24°C／15°C、降雨機率 40%；10/15 多雲時晴、約 24°C／12°C、降雨機率 30%。嵯峨野官方頁面已更新至 10/8 空席資訊，10/12 班次與行程仍可用；保津川官方最新紀錄至 10/7 為無等待，但仍受水位、天候與人潮影響。KATE 官方仍列 KIX 第一航廈 11:50→京都約 13:18、¥2,800；IT210、USJ、住宿、二條城與其他景點官方資料未見新變更。10/14 有降雨風險，二條城與戶外行程請準備雨具；10/12 遊船仍須前一晚及當日早上確認。',
+  links: [
+    { label: 'JMA 京都最新預報', url: 'https://www.data.jma.go.jp/yoho/data/jishin/met/kishoushien_Kyoto_Kyoto-shi.html' },
+    { label: '嵯峨野 10/8 空席／時刻表', url: 'https://www.sagano-kanko.co.jp/en/train-info/' },
+    { label: '保津川最新運航紀錄', url: 'https://www.hozugawakudari.jp/emergency/43635' },
+    { label: 'KATE 京都線官方時刻表', url: 'https://www.kate.co.jp/en/timetable/detail/KY' }
+  ]
+});
 
 const usjTicketStop = TRIP_DATA.days.find((day) => day.id === 'day-6')?.stops.find((stop) => stop.title.includes('園前集合'));
 if (usjTicketStop) {
