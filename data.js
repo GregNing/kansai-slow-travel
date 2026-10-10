@@ -385,3 +385,14 @@ TRIP_DATA.reminders.unshift({
     { label: 'USJ 官方 Halloween 活動', url: 'https://www.usj.co.jp/web/en/us/events/halloween-extreme-autumn-2026/halloween-horror-nights' }
   ]
 });
+TRIP_DATA.reminders.unshift({
+  title: '官方網站全掃｜2026/10/10 晚間',
+  text: '2026/10/10 17:00 JMA 最新預報：10/12 京都為多雲時晴、約 26°C／13°C、降雨機率 20%；10/13 多雲、26°C／14°C、40%；10/14 多雲偶雨、23°C／15°C、70%；10/15 多雲時晴、23°C／12°C、30%；10/16 多雲時晴、24°C／11°C、30%。保津川官方 10/10 更新：10/9 當日票 14:15 售罄、10/10 無等待；10/12 已購預約仍可用，但建議提前到受付，10/12 早上再確認運航。嵯峨野官方頁面仍更新至 10/10 空席資訊，已購 10/12 班次依票券；KATE、IT210、太秦電影村、USJ、住宿與其他景點官方資料未見新衝突。10/13–10/14 降雨風險提高，請準備雨具。',
+  links: [
+    { label: 'JMA 京都 10/10 17:00 預報', url: 'https://www.data.jma.go.jp/yoho/data/jishin/met/kishoushien_Kyoto_Kyoto-shi.html' },
+    { label: '保津川 10/10 官方運航／票況', url: 'https://www.hozugawakudari.jp/emergency/43635' },
+    { label: '嵯峨野 10/10 空席／時刻表', url: 'https://www.sagano-kanko.co.jp/en/train-info/' },
+    { label: 'KATE 京都線官方時刻表', url: 'https://www.kate.co.jp/en/timetable/detail/KY' },
+    { label: 'USJ 官方營業／活動資訊', url: 'https://www.usj.co.jp/web/en/us/park-guide/schedule/park-hour' }
+  ]
+});
