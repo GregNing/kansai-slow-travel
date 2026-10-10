@@ -373,3 +373,15 @@ TRIP_DATA.reminders.unshift({
     { label: '關西樂享周遊券最新清單', url: 'https://travelcontentsapp.com/en/have-fun-pass/kansai/?_type=experience' }
   ]
 });
+TRIP_DATA.reminders.unshift({
+  title: '官方網站全掃｜2026/10/10 最新',
+  text: '2026/10/10 11:00 JMA 最新預報：10/12 京都晴時多雲、約 26°C／13°C、降雨機率 10%；10/13 多雲、約 26°C／14°C、降雨機率 40%；10/14 多雲偶雨、約 22°C／15°C、降雨機率 70%；10/15 多雲時晴、約 23°C／12°C、降雨機率 30%；10/16 多雲時晴、約 24°C／10°C、降雨機率 30%。保津川官方新增 10/9 14:15 當日票售罄，顯示連假需求升高；本行程已有預約，仍應提早到受付。嵯峨野官方頁面已更新至 10/10 空席資訊，10/12 已購班次仍依票券；KATE、IT210、太秦電影村、USJ、住宿與其餘景點官方資料未見新衝突。10/14、10/13 有較高降雨風險，請準備雨具；10/12 保津川仍須 10/11 晚間及 10/12 早上確認實際運航。',
+  links: [
+    { label: 'JMA 京都最新預報', url: 'https://www.data.jma.go.jp/yoho/data/jishin/met/kishoushien_Kyoto_Kyoto-shi.html' },
+    { label: '保津川最新待票狀況', url: 'https://www.hozugawakudari.jp/emergency/43635' },
+    { label: '嵯峨野 10/10 空席／時刻表', url: 'https://www.sagano-kanko.co.jp/en/train-info/' },
+    { label: 'KATE 京都線官方時刻表', url: 'https://www.kate.co.jp/en/timetable/detail/KY' },
+    { label: '太秦電影村官方活動', url: 'https://eigamura.com/feature/yokai2026/' },
+    { label: 'USJ 官方 Halloween 活動', url: 'https://www.usj.co.jp/web/en/us/events/halloween-extreme-autumn-2026/halloween-horror-nights' }
+  ]
+});
